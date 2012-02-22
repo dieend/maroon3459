@@ -1,14 +1,86 @@
 #include "Date.h"
+//created by MA-A2
 
 Date Date::default_date = Date(1,1,1981);
 int Date::_day_of_month[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+
+Date::Date(const Date& dt) {
+	d = dt.day();
+	m = dt.month();
+	y = dt.year();
+}
+Date& Date::operator=(const Date&dt){
+	d = dt.day();
+	m = dt.month();
+	y = dt.year();
+	return (*this);
+}
+Date::Date(){
+	d = default_date.day();
+	m = default_date.month();
+	y = default_date.year();
+}
+Date::Date(int dd, int mm, int yy){
+	if (valid_date(dd,mm,yy)) {
+		this->d = dd;
+		this->m = mm;
+		this->y = yy;
+	} else {
+		throw Bad_date();
+	}
+}
 
 int Date::day_of_month(int m){
 	if (m!=2) return _day_of_month[m-1];
 	return _day_of_month[m-1]+leapyear(y);
 }
 
-void Date::compute_cache_value() const{
+
+void Date::set_default(int dd, int mm, int yy){
+	default_date = Date(dd,mm,yy);
+}
+
+int Date::day() const{
+	return d;
+}
+
+int Date::month() const{
+	return m;
+}
+
+int Date::year() const{
+	return y;
+}
+
+Date& Date::add_year(int n){
+	y+=n;
+	return (*this);
+}
+
+Date& Date::add_month(int n){
+	m += n;
+	y += (m-1)/12;
+	m = ((m-1)%12) + 1;
+	return (*this);
+}
+
+Date& Date::add_day(int n){
+	while (n--) {
+		operator++();
+	}
+	return *this;
+}
+
+
+int Date::leapyear(int n){
+	if (n%100==0){
+		return (n%400==0);
+	} else {
+		return (n%4==0);
+	}
+}
+
+string Date::string_rep() const{
 	stringstream ss (stringstream::in | stringstream::out);
 	
 	ss << day() << " ";
@@ -51,67 +123,8 @@ void Date::compute_cache_value() const{
 			break;
 	}
 	ss << " " << year();
-	ss >> c->rep;
-}
 
-Date::Date(int dd, int mm, int yy){
-	if (valid_date(dd,mm,yy)) {
-		this->d = dd;
-		this->m = mm;
-		this->y = yy;
-	} else {
-		throw Bad_date();
-	}
-}
-
-void Date::set_default(int dd, int mm, int yy){
-	default_date = Date(dd,mm,yy);
-}
-
-int Date::day() const{
-	return d;
-}
-
-int Date::month() const{
-	return m;
-}
-
-int Date::year() const{
-	return y;
-}
-
-Date& Date::add_year(int n){
-	y+=n;
-}
-
-Date& Date::add_month(int n){
-	m += n;
-	y += (m-1)/12;
-	m = ((m-1)%12) + 1;
-}
-
-Date& Date::add_day(int n){
-	while (n--) {
-		operator++();
-	}
-	return *this;
-}
-
-
-int Date::leapyear(int n){
-	if (n%100==0){
-		return (n%400==0);
-	} else {
-		return (n%4==0);
-	}
-}
-
-string Date::string_rep() const{
-	if (!c->valid){
-		compute_cache_value();
-		c->valid = true;
-	}
-	return c->rep;
+	return ss.str();
 }
 
 bool Date::operator!=(const Date& d) const{
@@ -137,11 +150,13 @@ Date& Date::operator++(){
 	d++;
 	if (d>day_of_month(m)) d=1,m++;
 	if (m>12) y++, m=1;
+	return(*this);
 }
 Date& Date::operator--(){
 	d--;
 	if (d==0) m--,d=day_of_month(m);
 	if (m==0) y--;
+	return(*this);
 }
 
 Date& Date::operator+=(int n){
@@ -153,6 +168,7 @@ Date& Date::operator-=(int n){
 	while(n--) {
 		operator--();
 	}
+	return(*this);
 }
 
 Date Date::operator+(int n){
@@ -171,7 +187,7 @@ ostream& operator<<(ostream& c, Date d){
 }
 istream& operator>>(istream& c, Date& d){
 	int dd,mm,yy;
-	c >> dd >> mm >> yy;
+	c >> yy >> mm >> dd;
 	d = Date(dd,mm,yy);
 	return c;
 }
@@ -205,3 +221,12 @@ bool Date::valid_date(int dd, int mm, int yy){
 	}
 	return valid;
 }
+Date::~Date(){
+}
+/*
+int main(){
+	Date date;
+	cin >> date;
+	cout << date;
+}
+*/

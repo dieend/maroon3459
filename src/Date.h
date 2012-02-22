@@ -2,23 +2,21 @@
 #define DATE_H
 #include <string>
 #include <sstream>
+#include <iostream>
 using namespace std;
-
-struct cache {
-	bool valid;
-	string rep;
-};
+//created by MA-A2
 
 class Date{
 	int d, m, y;
 	static Date default_date;
 	static int _day_of_month[12];
-	cache* c;
-	void compute_cache_value() const;
 	bool valid_date(int dd, int mm, int yy);
 public:
 	int day_of_month(int m);
-	Date(int dd=0, int mm = 0, int yy = 0);
+	Date(int dd, int mm, int yy);
+	Date();
+	Date(const Date& dt);
+	~Date();
 	static void set_default(int dd, int mm, int yy);
 	int day() const;
 	int month() const;
@@ -29,6 +27,9 @@ public:
 	static int leapyear(int n);
 	string string_rep() const;
 	class Bad_date{};
+	
+	Date& operator=(const Date&dt);
+	
 	bool operator!=(const Date&) const;
 	bool operator<(const Date&) const;
 	bool operator>(const Date&) const;
