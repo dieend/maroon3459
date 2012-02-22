@@ -13,12 +13,12 @@ Menu::Menu()
 void Menu::display_main_menu() const 
 {
 	cout << "-------Main Menu---------\n";
-  cout << "1.Display Info"\n;
-  cout << "2.Read"\n;
-  cout << "3.Show"\n;
-  cout << "4.Find"\n;
-  cout << "5.Update"\n;
-  cout << "6.Exit"\n;
+  cout << "1.Display Info\n";
+  cout << "2.Read\n";
+  cout << "3.Show\n";
+  cout << "4.Find\n";
+  cout << "5.Update\n";
+  cout << "6.Exit\n";
   cout << "Please insert your choice :\n";
 }
 void Menu::display_info() const
