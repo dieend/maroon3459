@@ -12,15 +12,15 @@ private:
      
 
    // private data
-	int prod_id;
-	int cat_id;
-	string prod_name;
-	double prod_price;
+ 
 
    
 public:
 	//data
-
+   int prod_id;
+	int cat_id;
+	string prod_name;
+	double prod_price;
 	// constructors
 	Product () {}
 
