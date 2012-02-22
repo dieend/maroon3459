@@ -8,6 +8,8 @@
 //
 
 #include "Menu.h"
+#include <stdlib.h>
+
 
 using namespace std;
 
@@ -20,7 +22,7 @@ try {
    do {
       cout << "> ";
 	  while (!(cin >> option) || option < Menu::Info || option > Menu::Exit) {
-         if (cin.fail()) {    // we found something that wasn’t an integer 
+         if (cin.fail()) {    // we found something that wasnâ€™t an integer 
             cin.clear();      // enable us to look at the characters
             char ch;
             while (cin>>ch && !isdigit(ch)) {
@@ -32,7 +34,8 @@ try {
             cerr << "Invalid input; please try again" << endl;
             cout << "> ";
          }
-      } 
+      }
+		system("cls");
 			
       switch(option) { 
       case Menu::Info:
