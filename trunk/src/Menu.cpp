@@ -68,6 +68,31 @@ void Menu::read()
 	}
 	fs.close();
 	// finish reading cart and cart item
+   
+   
+  fstream fsp;
+	int n1;
+	string file_prod_name;
+	Product prod;
+	//-----------------------------------------
+	cout << "--------------------------------\n";
+	cout << "Reading product data\n";
+	cout << "Enter file name for product data data : ";
+	cin >> file_prod_name;
+	fsp.open(file_prod_name.c_str());
+	fsp >> n1;
+	prods.clear();
+	for (int i=0; i<n1; i++) {
+		fsp >> prod.prod_id;
+		fsp >> prod.cat_id;
+		fsp >> prod.prod_name;
+		fsp >> prod.prod_price;
+		prods.push_back(prod);
+		}
+  fsp.close();
+	cout << "Reading Successfull\n";
+   
+   
 }
 void Menu::show() const 
 {
