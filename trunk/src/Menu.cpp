@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include <iostream>
+#include <fstream>
 //additional includes
 
 
@@ -27,6 +28,39 @@ void Menu::read()
 {
 	cout << "Read file name then read store data \n";
 	
+	int n;
+	fstream fs;
+	string filename;
+	// reading carts data
+	cout << "Enter file name for carts data : ";
+	cin >> filename;
+	// carts.dat
+	fs.open(filename.c_str());
+	fs >> n;
+	carts.clear();
+	Cart tmp;
+	for (int i=0; i<n; i++) {
+		fs >> tmp;
+		carts.push_back(tmp);
+	}
+	
+	for (int i=0; i<n; i++) {
+		cout << carts[i];
+	}
+	
+	// reading cart_items data
+	fs >> n;
+	cart_items.clear();
+	Cart_item ci;
+	for (int i=0; i<n; i++) {
+		fs >> ci;
+		cart_items.push_back(ci);
+	}
+	for (int i=0; i<n; i++) {
+		cout << cart_items[i];
+	}
+	fs.close();
+	// finish reading cart and cart item
 }
 void Menu::show() const 
 {
