@@ -85,6 +85,32 @@ void Menu::read()
     fsp.close();
 	cout << "Reading Successfull\n";
    
+ cout<<"Please enter input file name: ";
+    ifstream ifs;
+    string name;
+    cin>>name;
+    ifs.open(name.c_str());
+    if(!ifs)cerr<<("can't open file, ",name);
+    int n;
+    ifs>>n;
+    int id;
+    int house_n;
+    int z;
+    string cust_name;
+    string strt;
+    Address address(house_n, strt, z);
+    custs.clear();
+    for(int i=0; i<n;i++){
+        ifs >> id;
+        ifs >> cust_name;
+        ifs >> house_n;
+        ifs >> strt;
+        ifs >> z;
+        custs.push_back(Customer(id,cust_name,address));
+    }
+    ifs.close();
+    cout<< "reading complete\n";  
+
    
 }
 void Menu::show() const 
