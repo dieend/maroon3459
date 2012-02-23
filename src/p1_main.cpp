@@ -68,6 +68,7 @@ try {
             else {
                 cerr << "Invalid input" << endl;
                 main();
+             }
       }
 	  
       m.display_main_menu();
