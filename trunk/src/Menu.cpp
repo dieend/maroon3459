@@ -51,10 +51,6 @@ void Menu::read()
 		carts.push_back(tmp);
 	}
 	
-	for (int i=0; i<n; i++) {
-		cout << carts[i];
-	}
-	
 	// reading cart_items data
 	fs >> n;
 	cart_items.clear();
@@ -63,14 +59,11 @@ void Menu::read()
 		fs >> ci;
 		cart_items.push_back(ci);
 	}
-	for (int i=0; i<n; i++) {
-		cout << cart_items[i];
-	}
 	fs.close();
 	// finish reading cart and cart item
    
    
-  fstream fsp;
+    fstream fsp;
 	int n1;
 	string file_prod_name;
 	Product prod;
@@ -89,7 +82,7 @@ void Menu::read()
 		fsp >> prod.prod_price;
 		prods.push_back(prod);
 		}
-  fsp.close();
+    fsp.close();
 	cout << "Reading Successfull\n";
    
    

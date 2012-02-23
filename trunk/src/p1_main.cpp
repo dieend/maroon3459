@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : p1_main.cpp
-// Authors      : 
-// Version     :
+// Authors     : Muhammad Adinata, Aldo Suwandi, Selvin Perez
+// Version     : 0.8
 // Copyright   : Your copyright notice
 // Description : C++ project part 1  
 //============================================================================
