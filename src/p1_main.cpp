@@ -59,6 +59,15 @@ try {
 	  case Menu::Update:
          m.update();
          break;
+    case Menu::Exit:
+         cout<<"Are you sure you want to exit?\nEnter 1 for yes OR 2 for no\n";
+            int q;
+            cin>>q;
+            if (q==1)return 0;
+            if (q==2)  main();
+            else {
+                cerr << "Invalid input" << endl;
+                main();
       }
 	  
       m.display_main_menu();
