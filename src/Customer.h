@@ -23,7 +23,7 @@ private:
    // private data
 	int cust_id;
 	string cust_name;
-	//Address addr;		
+	Address addr;		
 };
 
 
