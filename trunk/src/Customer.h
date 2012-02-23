@@ -4,15 +4,15 @@
 #include <string>
 
 // other types
-//#include "Address.h"		//uncomment once you have added the type definition
+#include "Address.h"  
 
 using namespace std;
 
 struct Customer {
 public:
 	// constructors
-	//Customer (int id, string n, Address a)	//uncomment once you have added the type definition
-	//	: cust_id(id), cust_name(n), addr(a) {}
+	Customer (int id, string n, Address a)	
+	 : cust_id(id), cust_name(n), addr(a) {}
 
    // utility functions
 	string display() const;
@@ -23,7 +23,7 @@ private:
    // private data
 	int cust_id;
 	string cust_name;
-	//Address addr;			//uncomment once you have added the type definition
+	//Address addr;		
 };
 
 
