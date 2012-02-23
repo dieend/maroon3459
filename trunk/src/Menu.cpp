@@ -91,8 +91,8 @@ void Menu::read()
     cin>>name;
     ifs.open(name.c_str());
     if(!ifs)cerr<<("can't open file, ",name);
-    int n;
-    ifs>>n;
+    int n2;
+    ifs>>n2;
     int id;
     int house_n;
     int z;
