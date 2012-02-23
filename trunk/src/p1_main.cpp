@@ -35,7 +35,7 @@ try {
             cout << "> ";
          }
       }
-		system("cls");
+      system("cls");
 			
       switch(option) { 
       case Menu::Info:

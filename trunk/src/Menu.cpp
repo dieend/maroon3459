@@ -1,6 +1,4 @@
 #include "Menu.h"
-#include <iostream>
-#include <fstream>
 //additional includes
 
 
@@ -39,27 +37,34 @@ void Menu::read()
 	fstream fs;
 	string filename;
 	// reading carts data
+	cout << "--------------------------------\n";
+	cout << "Reading cart data :\n";
 	cout << "Enter file name for carts data : ";
 	cin >> filename;
 	// carts.dat
 	fs.open(filename.c_str());
-	fs >> n;
-	carts.clear();
-	Cart tmp;
-	for (int i=0; i<n; i++) {
-		fs >> tmp;
-		carts.push_back(tmp);
-	}
+	if (!fs) {
+		cerr << "can't open file " << filename << endl;
+	} else {
+		fs >> n;
+		carts.clear();
+		Cart tmp;
+		for (int i=0; i<n; i++) {
+			fs >> tmp;
+			carts.push_back(tmp);
+		}
 	
-	// reading cart_items data
-	fs >> n;
-	cart_items.clear();
-	Cart_item ci;
-	for (int i=0; i<n; i++) {
-		fs >> ci;
-		cart_items.push_back(ci);
+		// reading cart_items data
+		fs >> n;
+		cart_items.clear();
+		Cart_item ci;
+		for (int i=0; i<n; i++) {
+			fs >> ci;
+			cart_items.push_back(ci);
+		}
+		fs.close();
+		cout << "Reading Successfull\n";
 	}
-	fs.close();
 	// finish reading cart and cart item
    
    
@@ -70,48 +75,61 @@ void Menu::read()
 	//-----------------------------------------
 	cout << "--------------------------------\n";
 	cout << "Reading product data\n";
-	cout << "Enter file name for product data data : ";
+	//cout << "Enter file name for product data data : "; MA-A2
+	cout << "Enter file name for product data: "; //MA-A2
 	cin >> file_prod_name;
 	fsp.open(file_prod_name.c_str());
-	fsp >> n1;
-	prods.clear();
-	for (int i=0; i<n1; i++) {
-		fsp >> prod.prod_id;
-		fsp >> prod.cat_id;
-		fsp >> prod.prod_name;
-		fsp >> prod.prod_price;
-		prods.push_back(prod);
-		}
-    fsp.close();
-	cout << "Reading Successfull\n";
-   
- cout<<"Please enter input file name: ";
+	if (!fsp) {
+		cerr<< "can't open file " << file_prod_name << endl;  // MA-A2
+	} else {
+		fsp >> n1;
+		prods.clear();
+		for (int i=0; i<n1; i++) {
+			fsp >> prod.prod_id;
+			fsp >> prod.cat_id;
+			fsp >> prod.prod_name;
+			fsp >> prod.prod_price;
+			prods.push_back(prod);
+			}
+		fsp.close();
+		cout << "Reading Successfull\n";
+	}	
+	
+	cout << "--------------------------------\n";   
+	cout << "Reading customer data\n";
+	//cout<<"Please enter input file name: "; MA-A2
+	cout << "Enter file name for customer data: "; //MA-A2
     ifstream ifs;
     string name;
     cin>>name;
     ifs.open(name.c_str());
-    if(!ifs)cerr<<("can't open file, ",name);
-    int n2;
-    ifs>>n2;
-    int id;
-    int house_n;
-    int z;
-    string cust_name;
-    string strt;
-    Address address(house_n, strt, z);
-    custs.clear();
-    for(int i=0; i<n;i++){
-        ifs >> id;
-        ifs >> cust_name;
-        ifs >> house_n;
-        ifs >> strt;
-        ifs >> z;
-        custs.push_back(Customer(id,cust_name,address));
-    }
-    ifs.close();
-    cout<< "reading complete\n";  
-
-   
+    //if(!ifs)cerr<<("can't open file, ",name); MA-A2
+    if(!ifs) { // MA-A2
+    	// cerr<<("can't open file, ",name); //MA-A2
+    	cerr<< "can't open file " << name << endl;
+    } else {
+		int n2;
+		ifs>>n2;
+		int id;
+		int house_n;
+		int z;
+		string cust_name;
+		string strt;
+		//Address address(house_n, strt, z); MA-A2
+		custs.clear();
+		for(int i=0; i<n;i++){
+		    ifs >> id;
+		    ifs >> cust_name;
+		    ifs >> house_n;
+		    ifs >> strt;
+		    ifs >> z;
+		    Address address(house_n, strt, z); // MA-A2
+		    custs.push_back(Customer(id,cust_name,address));
+		}
+		ifs.close();
+		//cout<< "reading complete\n";
+		cout<< "Reading Successfull\n"; // MA-A2
+	}
 }
 void Menu::show() const 
 {
