@@ -15,7 +15,13 @@ public:
 	 : cust_id(id), cust_name(n), addr(a) {}
 
    // utility functions
-	string display() const;
+	string display() const{
+   char id_buffer [50];
+        sprintf(id_buffer, "%d" ,cust_id);
+        string id_string (id_buffer);
+        return cust_name+"    Customer ID: "+id_string+"    Address: "+ addr.display();
+       } 
+   
 	
 private:
    //constants
