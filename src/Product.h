@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <vector>
 using namespace std;
 
 struct Product
@@ -27,6 +28,7 @@ public:
 	friend istream& operator>>(istream&, Product d);
 	// comparator
 	static bool cheaper(const Product& a, const Product& b); // MA-S3
+	static vector<const Product*>& getProductsByCategory(const vector<Product>& product, int id); //MA-S3
 };
 
 

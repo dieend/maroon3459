@@ -35,3 +35,16 @@ istream& operator>>(istream& c, Cart_item& d){
 	return c;
 }
 
+int Cart_item::cartItemId() const{
+	return cart_item_id;
+}
+int Cart_item::cartId()const {
+	return cart_id;
+}
+int Cart_item::prodId()const {
+	return prod_id;
+}
+int Cart_item::prodQty()const {
+	return prod_qty;
+}
+
