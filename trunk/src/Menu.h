@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 //other types
 #include "Category.h"
 #include "Product.h"
