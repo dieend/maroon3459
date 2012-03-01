@@ -9,24 +9,17 @@ struct Product
 {
 private:
    //constants
-     
-
-   // private data
- 
-
-   
+   //moved to public data
 public:
 	//data
-   int prod_id;
+	int prod_id;
 	int cat_id;
 	string prod_name;
 	double prod_price;
 	// constructors
 	Product () {}
-
    // utility functions
 	string display() const;
-   
 };
 
 
