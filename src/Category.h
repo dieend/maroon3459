@@ -11,6 +11,9 @@ using namespace std;
 
 struct Category {
 public:
+   //data
+	int cat_id;
+	string cat_name;
 	// constructors
 	Category () {}
 
@@ -18,11 +21,8 @@ public:
 	string display() const;
 
 private:
-   //constants
-     
-   // private data
-	int cat_id;
-	string cat_name;
+   //constants	
+   //moved to public data
 };
 
 
