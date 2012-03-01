@@ -235,10 +235,10 @@ void Menu::find() const
 			}
 			if (category_id == NULL) {
 			} else {
-				int total_sell = 0;
+				double total_sell = 0;
 				vector<const Product*> products = Product::getProductsByCategory(prods,(int)*category_id);
 				for (int i=0; i<(int)products.size(); i++) {
-					total_sell += products[i]->get_price();
+					total_sell += products[i]->getTotalSell(cart_items);
 				}
 				cout << "Total sell products by category " + category_name + " is " << total_sell << endl;
 				delete category_id;
@@ -318,16 +318,16 @@ void Menu::update()
         }
         
         else if (inp ==3) { // new Cart item
-        	int cart_item_id,cart_id, prod_id,prod_qty;
-        	cout << " Enter cart item id: ";
-        	cin >> cart_item_id;
-        	cout << "      Enter cart id: ";
-        	cin >> cart_id;
-        	cout << "   Enter product id: ";
-        	cin >> prod_id;
-        	cout << "  Enter product Qty: ";
-        	cin >> prod_qty;
-        	cart_items.push_back(Cart_item(cart_item_id, cart_id, prod_id, prod_qty));
+        	int cart_item_id,cart_id, prod_id,prod_qty; // MA-S3
+        	cout << " Enter cart item id: ";// MA-S3
+        	cin >> cart_item_id;// MA-S3
+        	cout << "      Enter cart id: ";// MA-S3
+        	cin >> cart_id;// MA-S3
+        	cout << "   Enter product id: ";// MA-S3
+        	cin >> prod_id;// MA-S3
+        	cout << "  Enter product Qty: ";// MA-S3
+        	cin >> prod_qty;// MA-S3
+        	cart_items.push_back(Cart_item(cart_item_id, cart_id, prod_id, prod_qty));// MA-S3
         }
         
         else {

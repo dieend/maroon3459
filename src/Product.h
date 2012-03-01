@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include "Cart_item.h"
 using namespace std;
 
 struct Product
@@ -24,11 +25,17 @@ public:
 	// constructors
 	Product () {}
    // utility functions
-	string display() const;
+    string display() const;
+
 	friend istream& operator>>(istream&, Product d);
 	// comparator
 	static bool cheaper(const Product& a, const Product& b); // MA-S3
+	
+	
+	// helper
+	double getTotalSell(const vector<Cart_item>& cart_items) const; // MA-S3
 	static vector<const Product*>& getProductsByCategory(const vector<Product>& product, int id); //MA-S3
+	
 };
 
 
