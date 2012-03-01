@@ -20,7 +20,7 @@ bin/Cart_item.o: src/Cart_item.cpp
 bin/Product.o: src/Product.cpp
 	g++ -c src/Product.cpp -o bin/Product.o -Wall
 clean:
-	rm bin/* p1_main
+	rm bin/* p1_main src/*~
 
 run:
 	./p1_main

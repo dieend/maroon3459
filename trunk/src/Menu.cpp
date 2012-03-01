@@ -175,11 +175,13 @@ void Menu::show() const
             }
         }
         
-        else if (inp ==3) { // Cart
+        else if (inp ==3) { // Product
 			vector<Product> tmp(prods);
 			sort(tmp.begin(), tmp.end(), Product::cheaper);
 			for (int i=0; i<(int)prods.size(); i++) {
-				prods[i].display();
+				cout << "Product Name: "<< prods[i].get_name() << endl;
+				cout << "Product ID: "<< prods[i].get_id() << endl;
+				cout << "Product Price: "<< prods[i].get_price() << endl;			
 			}
         }
         
@@ -218,11 +220,29 @@ void Menu::find() const
                 
         }
         else if (inp ==2) { // Customer
-        
         }
         
-        else if (inp ==3) { // Cart
-        
+        else if (inp ==3) { // total sales product by category // MA-SA3
+        	string category_name;
+        	int* category_id = NULL;
+        	cout << "Input Category Name: ";  // MA-SA3
+			cin >> category_name;
+			for (int i=0; i<(int) cats.size(); i++) {
+				if (category_name == cats[i].cat_name) {
+					category_id = new int;
+					*category_id = cats[i].cat_id;
+				}
+			}
+			if (category_id == NULL) {
+			} else {
+				int total_sell = 0;
+				vector<const Product*> products = Product::getProductsByCategory(prods,(int)*category_id);
+				for (int i=0; i<(int)product.size(); i++) {
+					total_sell += product[i]->get_price();
+				}
+				cout << "Total sell products by category " + category_name + " is " << total_sell << endl;
+				delete category_id;
+			}
         }
         
         else {
