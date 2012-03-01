@@ -33,3 +33,4 @@ int Product::get_id() const{} // MA-S3
 int Product::get_cat_id() const{} // MA-S3
 string Product::get_name() const{} // MA-S3
 double Product::get_price() const{} //MA-S3
+double Product::getTotalSell(const vector<Cart_item>& cart_items) const {} // MA-S3
