@@ -69,8 +69,11 @@ void Product::set_price(double price){
 
 
 double Product::getTotalSell(const vector<Cart_item>& cart_items) const {
+	int temp = 0;
 	for (int i = 0; i < cart_items.size() ; i++ ) {
-		if (prod_id == cart_items[i].prodId())
-		return cart_items[i].prodQty();
+		if (prod_id == cart_items[i].prodId()) {
+			temp = temp + cart_items[i].prodQty();
+		}
+			return temp;
 	}
 } // MA-S3
