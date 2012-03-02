@@ -160,7 +160,7 @@ void Menu::show() const
                         cout << "Products : " << endl;
                         for (int j = 0; j < (int)prods.size(); j++) {
                                 if (prods[j].get_cat_id() == cats[i].cat_id) {
-                                        prods[j].display();
+                                        cout << prods[j].display();
                                 }
                         }
                         cout << "--------------------------------" << endl;
@@ -193,8 +193,8 @@ void Menu::find() const
     int inp = 0;
         cout << "Find Menu" << endl;
         cout << "1. Find Category and Product" << endl;
-        cout << "2. Find Customer Data" << endl;
-        cout << "3. Find Cart Data" << endl;
+        cout << "2. Find Total sell of a Customer" << endl;
+        cout << "3. Find Total sell Products by Category" << endl;
         cout << "Input : ";
         cin >> inp;
         
@@ -227,6 +227,7 @@ void Menu::find() const
 				}
 			}
 			if (category_id == NULL) {
+				cout << "There is no Category with name " + category_name << endl;
 			} else {
 				int m = 0;
 				double total_sell = 0;
