@@ -15,7 +15,7 @@ public:
 	 : cust_id(id), cust_name(n), addr(a) {}
 
    // utility functions
-	string display() const{ SP-3
+	string display() const{ //SP-3
    stringstream ss;
      ss << cust_name<<endl;
      ss <<"Customer ID: "<<cust_id<<"    Address: "<< addr.display()<<endl;
