@@ -160,9 +160,7 @@ void Menu::show() const
                         cout << "Products : " << endl;
                         for (int j = 0; j < (int)prods.size(); j++) {
                                 if (prods[j].get_cat_id() == cats[i].cat_id) {
-                                        cout << "Product ID: "<< prods[j].get_id() << endl;
-                                        cout << "Product Name: "<< prods[j].get_name() << endl;
-                                        cout << "Product Price: "<< prods[j].get_price() << endl;
+                                        prods[j].display();
                                 }
                         }
                         cout << "--------------------------------" << endl;
@@ -193,7 +191,7 @@ void Menu::show() const
 void Menu::find() const 
 {
     int inp = 0;
-        cout << "Show Menu" << endl;
+        cout << "Find Menu" << endl;
         cout << "1. Find Category and Product" << endl;
         cout << "2. Find Customer Data" << endl;
         cout << "3. Find Cart Data" << endl;
@@ -207,17 +205,12 @@ void Menu::find() const
                 int sold;
                 cout << "Input Product ID :";
                 cin >> prod_id;
-                cout << "Input sold number for the given product :" ;
-                cin >> sold;
-                for (i = 0; i < (int)prods.size(); i ++) {
-                        if (prods[i].get_id() == prod_id) {
-                                val = 1;
-                                break;
-                        }
-                }
-                if (val == 1) cout << "Total Sales =" << prods[i].get_price()*sold << endl;
-                else cout << "Product not found!" << endl;
-                
+				for (i = 0; i < prods.size() ; i++) {
+					if (prods[i].get_id() == prod_id) {
+					break;
+					}
+				}
+                cout << "Total sales for given product : " << prods[i].getTotalSell(cart_items)*prods[i].get_price() << endl;	
         }
         else if (inp ==2) { // Customer
         }
@@ -235,6 +228,7 @@ void Menu::find() const
 			}
 			if (category_id == NULL) {
 			} else {
+				int m = 0;
 				double total_sell = 0;
 				vector<const Product*> products = Product::getProductsByCategory(prods,(int)*category_id);
 				for (int i=0; i<(int)products.size(); i++) {
@@ -256,7 +250,7 @@ void Menu::find() const
 void Menu::update()  
 {
      int inp = 0;
-        cout << "Show Menu" << endl;
+        cout << "Update Menu" << endl;
         cout << "1. Update Category and Product" << endl;
         cout << "2. Update Customer Data" << endl;
         cout << "3. Update Cart Data" << endl;
@@ -265,9 +259,10 @@ void Menu::update()
         
         if (inp == 1) { // Category
                 int cat_id;
+				int prod_id;
                 string prod_name;
+				double price;
                 int val = 0;
-                Product prod;
                 
                 cout << "Input category ID :" ;
                 cin >> cat_id;
@@ -279,16 +274,13 @@ void Menu::update()
                         }
                 }
                 if (val == 1) {
-                /*
                         cout << "Input Product ID :" ;
-                        cin >> prod.get_id();
+                        cin >> prod_id;
                         cout << "Input Product Name :" ;
-                        cin >> prod.get_name();
+                        cin >> prod_name;
                         cout << "Input Product Price :" ;
-                        cin >> prod.get_price();
-                        prod.cat_id = cat_id;
-                        prods.push_back(prod);
-                */
+                        cin >> price;
+                        prods.push_back(Product(prod_id, cat_id, prod_name,price));
                 }
                 else {
                         cout << "Category ID not found" << endl;

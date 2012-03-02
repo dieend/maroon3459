@@ -22,8 +22,13 @@ public:
 	int get_cat_id() const; // MA-S3
 	string get_name() const; // MA-S3
 	double get_price() const; //MA-S3
+	void set_id(int id); // MA-S3
+	void set_cat_id(int cat_id); // MA-S3
+	void set_name(string name); // MA-S3
+	void set_price(double price); //MA-S3
 	// constructors
-	Product () {}
+	Product (){}
+	Product (int prod, int cat, string name, double price);
    // utility functions
     string display() const;
 
