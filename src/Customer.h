@@ -15,11 +15,13 @@ public:
 	 : cust_id(id), cust_name(n), addr(a) {}
 
    // utility functions
-	string display() const{
-   char id_buffer [50];
-        sprintf(id_buffer, "%d" ,cust_id);
-        string id_string (id_buffer);
-        return cust_name+"    Customer ID: "+id_string+"    Address: "+ addr.display();
+	string display() const{ SP-3
+   stringstream ss;
+     ss << cust_name<<endl;
+     ss <<"Customer ID: "<<cust_id<<"    Address: "<< addr.display()<<endl;
+     ss <<"---------------------------------\n";
+       string s = ss.str();
+       return s;
        } 
    
 	
