@@ -1,11 +1,11 @@
 #include "Product.h"
 
 
-Product::Product (int prod, int cat, string name, double price) {
-	this->prod_id = prod;
+Product::Product (int prod, int cat, string name, double price) { //AS-S1
+	this->prod_id = prod; //AS-S1
 	this->cat_id = cat;
-	this->prod_name = name;
-	this->prod_price = price;
+	this->prod_name = name; //AS-S1
+	this->prod_price = price; //AS-S1
 
 } 
 
@@ -47,30 +47,30 @@ istream& operator>>(istream& fsp, Product& prod) { // MA-S3
 
 
 int Product::get_id() const{
-	return prod_id;
+	return prod_id; //AS-S1
 } // MA-S3
 int Product::get_cat_id() const{
-	return cat_id;
+	return cat_id; //AS-S1
 } // MA-S3
 string Product::get_name() const{
-	return prod_name;
+	return prod_name; //AS-S1
 } // MA-S3
 double Product::get_price() const{
-	return prod_price;
+	return prod_price; //AS-S1
 } //MA-S3
 
 
 void Product::set_id(int id){
-	this->prod_id = id;
+	this->prod_id = id; //AS-S1
 }
-void Product::set_cat_id(int cat_id){
-	this->cat_id = cat_id;
+void Product::set_cat_id(int cat_id){ //AS-S1
+	this->cat_id = cat_id; //AS-S1
 }
 void Product::set_name(string name){
-	this->prod_name = name;
+	this->prod_name = name; //AS-S1
 }
 void Product::set_price(double price){
-	this->prod_price = price;
+	this->prod_price = price; //AS-S1
 }
 
 
@@ -79,8 +79,8 @@ double Product::getTotalSell(const vector<Cart_item>& cart_items) const {
 	int temp = 0;
 	for (int i = 0; i < (int)cart_items.size() ; i++ ) {
 		if (prod_id == cart_items[i].prodId()) {
-			temp = temp + cart_items[i].prodQty();
+			temp = temp + cart_items[i].prodQty(); //AS-S1
 		}
 	}
-	return temp;
+	return prod_price*temp; //AS-S1
 } // MA-S3

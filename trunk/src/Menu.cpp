@@ -8,16 +8,16 @@ Menu::Menu()
 {
 }
 
-void Menu::display_main_menu() const 
+void Menu::display_main_menu() const  //AS-A3
 {
-  cout << "-------Main Menu---------\n";
-  cout << "1.Display Info\n";
-  cout << "2.Read\n";
-  cout << "3.Show\n";
-  cout << "4.Find\n";
-  cout << "5.Update\n";
-  cout << "6.Exit\n";
-  cout << "Please insert your choice :\n";
+  cout << "-------Main Menu---------\n"; //AS-A3
+  cout << "1.Display Info\n"; //AS-A3
+  cout << "2.Read\n"; //AS-A3
+  cout << "3.Show\n"; //AS-A3
+  cout << "4.Find\n"; //AS-A3
+  cout << "5.Update\n"; //AS-A3
+  cout << "6.Exit\n"; //AS-A3
+  cout << "Please insert your choice :\n"; //AS-A3
 }
 void Menu::display_info() const
 {
@@ -191,16 +191,16 @@ void Menu::read()
         Product prod;
         //-----------------------------------------
         cout << "--------------------------------\n";
-        cout << "Enter file name for category & product data: "; //MA-A2
-        cin >> file_prod_name;
+        cout << "Enter file name for category & product data: "; //MA-A2 AS-A3
+        cin >> file_prod_name; //AS-A3
         cout << "Reading category data...\n";
         //cout << "Enter file name for product data data : "; MA-A2
-        fsp.open(file_prod_name.c_str());
+        fsp.open(file_prod_name.c_str());  //AS-A3
         if (!fsp) {
                 cerr<< "can't open file " << file_prod_name << endl;  // MA-A2
         } 
         else {
-                fsp >> n1;
+                fsp >> n1; //AS-A3
                 for (int i=0; i<n1; i++) {
                         Category cat;
                         fsp >> cat.cat_id;
@@ -211,20 +211,19 @@ void Menu::read()
 				cout << "-----------------------------------\n";
 				cout << "Reading product data...\n";
 				//cout << "Enter file name for product data data : "; MA-A2
-                fsp >> n2;
                 prods.clear();
-                //for (int i=0; i<n1; i++) { //AS-S1
+				fsp >> n2;
                 for (int i=0; i<n2; i++) { //MA-S2: you should loop by S2
                         fsp >> prod;
-                        prods.push_back(prod);
+                        prods.push_back(prod); //AS-A3
                 }
                 cout << "Reading Product Successfull\n";
         }       
-        fsp.close();
+        fsp.close(); //AS-A3
 
         
         cout << "--------------------------------\n";   
-        cout << "Reading customer data\n";
+        cout << "Reading customer data\n"; 
         //cout<<"Please enter input file name: "; MA-A2
         cout << "Enter file name for customer data: "; //MA-A2
     ifstream ifs;
@@ -262,28 +261,28 @@ void Menu::read()
 void Menu::show() const 
 {
         //cout << "Show queries \n";
-        int inp = 0;
-        cout << "Show Menu" << endl;
-        cout << "1. Show Category and Product" << endl;
+        int inp = 0; //AS-S1
+        cout << "Show Menu" << endl;  //AS-S1
+        cout << "1. Show Category and Product" << endl; //AS-S1
         cout << "2. Show Customer Data" << endl;
         cout << "3. Show Product Data" << endl;
-        cout << "Input : ";
-        cin >> inp;
+        cout << "Input : "; //AS-S1
+        cin >> inp; //AS-S1
         
-        if (inp == 1) {
-                for (int i = 0; i < (int)cats.size(); i++) {
-                        cout << "Category ID : "<< cats[i].cat_id << endl;
-                        cout << "Category Name : "<< cats[i].cat_name << endl;
+        if (inp == 1) { //AS-S1
+                for (int i = 0; i < (int)cats.size(); i++) { //AS-S1
+                        cout << "Category ID : "<< cats[i].cat_id << endl; //AS-S1
+                        cout << "Category Name : "<< cats[i].cat_name << endl; //AS-S1
                         cout << "+++++++++++++++++++++++++++++++" << endl;
-                        cout << "Products : " << endl;
+                        cout << "Products : " << endl; //AS-S1
                         for (int j = 0; j < (int)prods.size(); j++) {
                                 if (prods[j].get_cat_id() == cats[i].cat_id) {
                                         cout << prods[j].display();
                                 }
                         }
                         cout << "--------------------------------" << endl;
-                }
-                cout << "Show queries \n";
+                } //AS-S1
+                cout << "Show queries \n"; //AS-S1
         }
         else if (inp ==2) { // Customer
         	vector<Customer> tmp(custs);
@@ -309,24 +308,25 @@ void Menu::show() const
 void Menu::find() const 
 {
     int inp = 0;
-        cout << "Find Menu" << endl;
-        cout << "1. Find Category and Product" << endl;
+        cout << "Find Menu" << endl; //AS-S1
+        cout << "1. Find Category and Product" << endl; //AS-S1
         cout << "2. Find Total sell of a Customer" << endl;
         cout << "3. Find Total sell Products by Category" << endl;
         cout << "Input : ";
-        cin >> inp;
+        cin >> inp; //AS-S1
         
         if (inp == 1) { // Category
                 int i = 0;
                 int prod_id;
+                int sold; //AS-S1
                 cout << "Input Product ID :";
-                cin >> prod_id;
+                cin >> prod_id; //AS-S1
 				for (i = 0; i < (int)prods.size() ; i++) {
-					if (prods[i].get_id() == prod_id) {
+					if (prods[i].get_id() == prod_id) { //AS-S1
 					break;
 					}
-				}
-                cout << "Total sales for given product : " << prods[i].getTotalSell(cart_items)*prods[i].get_price() << endl;	
+				} //AS-S1
+                cout << "Total sales for given product : " << prods[i].getTotalSell(cart_items)<< endl;	 //AS-S1
         }
         else if (inp ==2) { // Customer
         }
@@ -365,42 +365,42 @@ void Menu::find() const
 }
 void Menu::update()  
 {
-     int inp = 0;
-        cout << "Update Menu" << endl;
-        cout << "1. Update Category and Product" << endl;
+     int inp = 0; //AS-S1
+        cout << "Update Menu" << endl; //AS-S1
+        cout << "1. Update Category and Product" << endl; //AS-S1
         cout << "2. Update Customer Data" << endl;
         cout << "3. Update Cart Data" << endl;
-        cout << "Input : ";
+        cout << "Input : "; //AS-S1
         cin >> inp;
         
         if (inp == 1) { // Category
-                int cat_id;
+                int cat_id; //AS-S1
 				int prod_id;
-                string prod_name;
+                string prod_name; //AS-S1
 				double price;
                 int val = 0;
                 
-                cout << "Input category ID :" ;
-                cin >> cat_id;
+                cout << "Input category ID :" ; //AS-S1
+                cin >> cat_id; //AS-S1
                 
-                for (int i = 0; i < (int)cats.size(); i ++) {
+                for (int i = 0; i < (int)cats.size(); i ++) { //AS-S1
                         if (cats[i].cat_id == cat_id) {
                                 val = 1;
-                                break;
-                        }
+                                break; //AS-S1
+                        } //AS-S1
                 }
                 if (val == 1) {
-                        cout << "Input Product ID :" ;
+                        cout << "Input Product ID :" ; //AS-S1
                         cin >> prod_id;
-                        cout << "Input Product Name :" ;
+                        cout << "Input Product Name :" ; //AS-S1
                         cin >> prod_name;
-                        cout << "Input Product Price :" ;
+                        cout << "Input Product Price :" ; //AS-S1
                         cin >> price;
-                        prods.push_back(Product(prod_id, cat_id, prod_name,price));
+                        prods.push_back(Product(prod_id, cat_id, prod_name,price)); //AS-S1
                 }
                 else {
                         cout << "Category ID not found" << endl;
-                }
+                }//AS-S1
         }
         else if (inp ==2) { // Customer
                 int new_id;
