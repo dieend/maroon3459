@@ -43,6 +43,8 @@ public:
 	// helper
 	double getTotalSell(const vector<Cart_item>& cart_items) const; // MA-S3
 	static vector<const Product*>& getProductsByCategory(const vector<Product>& product, int id); //MA-S3
+	static int getProductById(const vector<Product>& products, int id);
+	static int getProductByName(const vector<Product>& products, const string& name);
 	
 };
 

@@ -18,7 +18,8 @@ public:
 	//Cart () {}
 	Cart();
 	Cart (int cart_id, int cust_id, Date& cart_puchase_date);
-	
+	int get_cart_id() const;
+	int get_cust_id() const;
    // utility functions
 	string display() const;
 private:
@@ -33,3 +34,4 @@ ostream& operator<<(ostream&, Cart d);
 istream& operator>>(istream&, Cart& d);
 
 #endif //CART_H_
+

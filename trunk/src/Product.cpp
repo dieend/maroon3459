@@ -73,6 +73,19 @@ void Product::set_price(double price){
 	this->prod_price = price; //AS-S1
 }
 
+int Product::getProductById(const vector<Product>& products, int id) {
+	for (int i=0; i<(int)products.size(); i++) {
+		if (products[i].get_id() == id) return i;
+	}
+	return products.size();
+}
+
+int Product::getProductByName(const vector<Product>& products, const string& name) {
+	for (int i=0; i<(int)products.size(); i++) {
+		if (products[i].get_name() == name) return i;
+	}
+	return products.size();
+}
 
 
 double Product::getTotalSell(const vector<Cart_item>& cart_items) const {

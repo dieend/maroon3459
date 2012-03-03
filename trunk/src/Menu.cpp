@@ -309,16 +309,16 @@ void Menu::find() const
 {
     int inp = 0;
         cout << "Find Menu" << endl; //AS-S1
-        cout << "1. Find Category and Product" << endl; //AS-S1
+        cout << "1. Find Total sell of a Product" << endl; //AS-S1
         cout << "2. Find Total sell of a Customer" << endl;
-        cout << "3. Find Total sell Products by Category" << endl;
+        cout << "3. Find Total sell of products by a Category" << endl;
         cout << "Input : ";
         cin >> inp; //AS-S1
         
         if (inp == 1) { // Category
                 int i = 0;
                 int prod_id;
-                int sold; //AS-S1
+                //AS-S1
                 cout << "Input Product ID :";
                 cin >> prod_id; //AS-S1
 				for (i = 0; i < (int)prods.size() ; i++) {
@@ -326,9 +326,31 @@ void Menu::find() const
 					break;
 					}
 				} //AS-S1
+				if (i>= (int) prods.size()) throw InvalidData();
                 cout << "Total sales for given product : " << prods[i].getTotalSell(cart_items)<< endl;	 //AS-S1
         }
         else if (inp ==2) { // Customer
+        	int cust_id;
+        	cout << "Input Customer ID : ";
+        	cin >> cust_id;
+        	vector<int> cart_ids_of_customer;
+        	for (int i=0; i<(int)carts.size(); i++) {
+        		if (cust_id == carts[i].get_cust_id()) {
+        			cart_ids_of_customer.push_back(carts[i].get_cart_id());
+        		}
+        	}
+        	double total_money = 0;
+        	for (int i=0; i<(int)cart_ids_of_customer.size(); i++) {
+        		for (int j=0; j<(int)cart_items.size();j++) {
+        			if (cart_items[j].cartId() == cart_ids_of_customer[i]) {
+        				int prod_loc = Product::getProductById(prods, cart_items[j].prodId());
+        				if (prod_loc >= (int) prods.size()) throw InvalidData();
+        				const Product& prod = prods[prod_loc];
+        				total_money += cart_items[j].prodQty()*prod.get_price();
+        			}
+        		}
+        	}
+        	cout << "Total sales for a given customer : " << total_money << endl;
         }
         
         else if (inp ==3) { // total sales product by category // MA-SA3
@@ -348,7 +370,7 @@ void Menu::find() const
 				double total_sell = 0;
 				vector<const Product*> products = Product::getProductsByCategory(prods,(int)*category_id);
 				for (int i=0; i<(int)products.size(); i++) {
-					total_sell += products[i]->getTotalSell(cart_items)*products[i]->get_price();
+					total_sell += products[i]->getTotalSell(cart_items);
 				}
 				cout << "Total sell products by category " + category_name + " is " << total_sell << endl;
 				delete category_id;
@@ -367,9 +389,9 @@ void Menu::update()
 {
      int inp = 0; //AS-S1
         cout << "Update Menu" << endl; //AS-S1
-        cout << "1. Update Category and Product" << endl; //AS-S1
-        cout << "2. Update Customer Data" << endl;
-        cout << "3. Update Cart Data" << endl;
+        cout << "1. Add Category and Product" << endl; //AS-S1
+        cout << "2. Add Customer Data" << endl;
+        cout << "3. Add Cart Data" << endl;
         cout << "Input : "; //AS-S1
         cin >> inp;
         

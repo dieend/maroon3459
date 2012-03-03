@@ -2,8 +2,6 @@
 #define ADDRESS_H_
 #include <string>
 #include <stdio.h>
-
-
 using namespace std;
 
 struct Address  {

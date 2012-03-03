@@ -29,4 +29,9 @@ istream& operator>>(istream& c, Cart& d){
 	return c;
 }
 
-
+int Cart::get_cart_id() const{
+	return cart_id;
+}
+int Cart::get_cust_id() const{
+	return cust_id;
+}
