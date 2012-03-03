@@ -2,6 +2,7 @@
 #define CUSTOMER_H_
 
 #include <string>
+#include <vector>
 #include <sstream>
 // other types
 #include "Address.h"  
@@ -15,7 +16,9 @@ public:
 
    // utility functions
 	string display() const;
-   static bool lexicographic_name(const Customer& a, const Customer & b);
+	int get_id() const;
+   static bool lexicographic_name(const Customer& a, const Customer & b); // MA-S3
+   static int findCustomerByName(const vector<Customer>& cust, const string& name);
 	
 private:
    //constants
