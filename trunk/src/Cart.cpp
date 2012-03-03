@@ -1,6 +1,6 @@
 #include "Cart.h"
-//created by MA-A2
 
+//MA-A2
 Cart::Cart (int cart_id, int cust_id, Date& cpd){
 	this->cart_id = cart_id;
 	this->cust_id = cust_id;
@@ -28,10 +28,11 @@ istream& operator>>(istream& c, Cart& d){
 	d = Cart(cart_id,cust_id,date);
 	return c;
 }
-
+//MA-S3
 int Cart::get_cart_id() const{
 	return cart_id;
 }
+//MA-S3
 int Cart::get_cust_id() const{
 	return cust_id;
 }

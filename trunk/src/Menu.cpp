@@ -28,10 +28,10 @@ void Menu::display_info() const
         cout << "               " << "Selvin Perez\n";
         cout << "\n";
 }
-void Menu::read_test()
+void Menu::read_test()   // MA-S3
 {
 	cout << "Read file name then read store data \n";
-        
+        //MA-A2
         int n;
         fstream fs;
         string filename;
@@ -66,7 +66,7 @@ void Menu::read_test()
                 cout << "Reading Successfull\n";
         }
         // finish reading cart and cart item
-   
+   		//MA-A2
    
 	    fstream fsp;
         int n1,n2;
@@ -99,7 +99,7 @@ void Menu::read_test()
                 fsp >> n2;
                 prods.clear();
                 //for (int i=0; i<n1; i++) { //AS-S1
-                for (int i=0; i<n2; i++) { //MA-S2: you should loop by S2
+                for (int i=0; i<n2; i++) { //MA-S2: you should loop by n2
                         fsp >> prod;
                         prods.push_back(prod);
                 }
@@ -285,19 +285,27 @@ void Menu::show() const
                 cout << "Show queries \n"; //AS-S1
         }
         else if (inp ==2) { // Customer
-        	vector<Customer> tmp(custs);
-        	sort(tmp.begin(), tmp.end(), Customer::lexicographic_name);
+        	vector<Customer> tmp(custs); //MA-S3
+        	sort(tmp.begin(), tmp.end(), Customer::lexicographic_name); //MA-S3
+            for (int i = 0; i < (int)tmp.size(); i++) { //MA-S3
+              cout<<tmp.at(i).display()<<endl;          //MA-S3        
+            }//MA-S3
+            
+            /** //SP-S2
             for (int i = 0; i < (int)tmp.size(); i++) {
-              cout<<tmp.at(i).display()<<endl;                  
+              cout<<cust.at(i).display()<<endl;                  
             }
+            */
         }
         
         else if (inp ==3) { // Product
+        	//MA-S3
 			vector<Product> tmp(prods);
 			sort(tmp.begin(), tmp.end(), Product::cheaper);	
 			for (int i=0; i<(int)tmp.size(); i++) {
 				cout << tmp[i].display();
 			}
+			//MA-S3
         }
         
         else {
@@ -326,10 +334,11 @@ void Menu::find() const
 					break;
 					}
 				} //AS-S1
-				if (i>= (int) prods.size()) throw InvalidData();
+				if (i>= (int) prods.size()) throw InvalidData(); //MA-S3
                 cout << "Total sales for given product : " << prods[i].getTotalSell(cart_items)<< endl;	 //AS-S1
         }
         else if (inp ==2) { // Customer
+        	//MA-S3
         	int cust_id;
         	cout << "Input Customer ID : ";
         	cin >> cust_id;
@@ -351,30 +360,33 @@ void Menu::find() const
         		}
         	}
         	cout << "Total sales for a given customer : " << total_money << endl;
+        	//MA-S3
         }
         
-        else if (inp ==3) { // total sales product by category // MA-SA3
+        else if (inp ==3) { // total sales product by category // MA-S3
+	        //MA-S3
         	string category_name;
         	int* category_id = NULL;
         	cout << "Input Category Name: ";  // MA-SA3
 			cin >> category_name;
-			for (int i=0; i<(int) cats.size(); i++) {
+			for (int i=0; i<(int) cats.size(); i++) { //MA-S3
 				if (category_name == cats[i].cat_name) {
 					category_id = new int;
-					*category_id = cats[i].cat_id;
+					*category_id = cats[i].cat_id; //MA-S3
 				}
 			}
 			if (category_id == NULL) {
-				cout << "There is no Category with name " + category_name << endl;
+				cout << "There is no Category with name " + category_name << endl; //MA-S3
 			} else {
 				double total_sell = 0;
-				vector<const Product*> products = Product::getProductsByCategory(prods,(int)*category_id);
+				vector<const Product*> products = Product::getProductsByCategory(prods,(int)*category_id); //MA-S3
 				for (int i=0; i<(int)products.size(); i++) {
-					total_sell += products[i]->getTotalSell(cart_items);
+					total_sell += products[i]->getTotalSell(cart_items); //MA-S3
 				}
-				cout << "Total sell products by category " + category_name + " is " << total_sell << endl;
+				cout << "Total sell products by category " + category_name + " is " << total_sell << endl; //MA-S3
 				delete category_id;
 			}
+			//MA-S3
         }
         
         else {

@@ -18,7 +18,7 @@ public:
 	string display() const;
 	int get_id() const;
    static bool lexicographic_name(const Customer& a, const Customer & b); // MA-S3
-   static int findCustomerByName(const vector<Customer>& cust, const string& name);
+   static int findCustomerByName(const vector<Customer>& cust, const string& name);  // MA-S3
 	
 private:
    //constants

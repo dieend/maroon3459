@@ -33,8 +33,7 @@ public:
    // utility functions
     string display() const;
 
-	//friend istream& operator>>(istream&, Product d); //SP-S2
-	friend istream& operator>>(istream&, Product& d); // MA-S3: The Product should be a reference, so it's have a &
+	friend istream& operator>>(istream&, Product& d); // MA-S3
 	
 	// comparator
 	static bool cheaper(const Product& a, const Product& b); // MA-S3
@@ -43,8 +42,8 @@ public:
 	// helper
 	double getTotalSell(const vector<Cart_item>& cart_items) const; // MA-S3
 	static vector<const Product*>& getProductsByCategory(const vector<Product>& product, int id); //MA-S3
-	static int getProductById(const vector<Product>& products, int id);
-	static int getProductByName(const vector<Product>& products, const string& name);
+	static int getProductById(const vector<Product>& products, int id); //MA-S3
+	static int getProductByName(const vector<Product>& products, const string& name);//MA-S3
 	
 };
 

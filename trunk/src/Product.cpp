@@ -9,7 +9,7 @@ Product::Product (int prod, int cat, string name, double price) { //AS-S1
 
 } 
 
-Product::Product(const Product& prod) {
+Product::Product(const Product& prod) {  // MA-S3
 	prod_id = prod.get_id();
 	cat_id = prod.get_cat_id();
 	prod_name = prod.get_name();

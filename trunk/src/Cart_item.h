@@ -13,10 +13,10 @@ public:
 	Cart_item(int citemid, int cart_id, int cidprod, int quantity);
    // utility functions
 	string display() const;
-	int cartItemId() const;
-	int cartId()const;
-	int prodId()const;
-	int prodQty()const;
+	int cartItemId() const; //MA-S3
+	int cartId()const; //MA-S3
+	int prodId()const;//MA-S3
+	int prodQty()const;//MA-S3
 
 
 private:
