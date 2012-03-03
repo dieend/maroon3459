@@ -467,30 +467,37 @@ void Menu::update()
         
         else if (inp ==3) { // new Cart item
         	int cart_item_id,cart_id, prod_id,prod_qty; // MA-S3
+        	bool valid = false;
         	cout << " Enter cart item id: ";// MA-S3
         	cin >> cart_item_id;// MA-S3
         	cout << "      Enter cart id: ";// MA-S3
         	cin >> cart_id;// MA-S3
-        	cout << "   Enter product id: ";// MA-S3
-        	cin >> prod_id;// MA-S3
-        	cout << "  Enter product Qty: ";// MA-S3
-        	cin >> prod_qty;// MA-S3
-        	bool valid = false;
-        	for (int i=0; valid || i<(int)carts.size(); i++) {
-        		if (carts[i].get_cart_id() == cart_id) valid = true;
+        	
+        	for (int i=0; !valid && i<(int)carts.size(); i++) {
+	    		if (carts[i].get_cart_id() == cart_id) valid = true;
         	}
         	if (!valid) {
         		cout << "There is no such cart.\n";
         		return;
         	}
+
+        	
+        	cout << "   Enter product id: ";// MA-S3
+        	cin >> prod_id;// MA-S3
+        	
         	valid = false;
-        	for (int i=0; valid || i<(int)prods.size(); i++) {
+        	for (int i=0; !valid && i<(int)prods.size(); i++) {
         		if (prods[i].get_id() == prod_id) valid = true;
         	}
         	if (!valid) {
         		cout << "There is no such product.\n";
         		return;
         	}        	
+        	
+        	
+        	cout << "  Enter product Qty: ";// MA-S3
+        	cin >> prod_qty;// MA-S3
+
         	cart_items.push_back(Cart_item(cart_item_id, cart_id, prod_id, prod_qty));// MA-S3
         }
         
