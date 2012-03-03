@@ -9,6 +9,12 @@ Product::Product (int prod, int cat, string name, double price) {
 
 } 
 
+Product::Product(const Product& prod) {
+	prod_id = prod.get_id();
+	cat_id = prod.get_cat_id();
+	prod_name = prod.get_name();
+	prod_price = prod.get_price();
+}
 
 bool Product::cheaper(const Product& a, const Product& b){ //MA-S3
 	return a.get_price() < b.get_price();//MA-S3
@@ -16,6 +22,7 @@ bool Product::cheaper(const Product& a, const Product& b){ //MA-S3
 
 string Product::display()const{ //MA-S3
 	stringstream ret;
+	ret << "----\n";
 	ret << "Product ID: "<< get_id() << endl;
 	ret << "Product Name: "<< get_name() << endl;
 	ret << "Product Price: "<< get_price() << endl;
@@ -30,7 +37,7 @@ vector<const Product*>& Product::getProductsByCategory(const vector<Product>& pr
 	}
 	return (*ret);
 }
-istream& operator>>(istream& fsp, Product prod) { // MA-S3
+istream& operator>>(istream& fsp, Product& prod) { // MA-S3
 	fsp >> prod.prod_id;
     fsp >> prod.cat_id;
     fsp >> prod.prod_name;
@@ -70,10 +77,10 @@ void Product::set_price(double price){
 
 double Product::getTotalSell(const vector<Cart_item>& cart_items) const {
 	int temp = 0;
-	for (int i = 0; i < cart_items.size() ; i++ ) {
+	for (int i = 0; i < (int)cart_items.size() ; i++ ) {
 		if (prod_id == cart_items[i].prodId()) {
 			temp = temp + cart_items[i].prodQty();
 		}
-			return temp;
 	}
+	return temp;
 } // MA-S3
