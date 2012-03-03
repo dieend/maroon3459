@@ -33,7 +33,7 @@ public:
    void display_main_menu() const;
    void display_info() const;
    void read();
-   void read_test();
+   void read_test();  // MA-S3
    void update();
    void show() const;
    void find() const;

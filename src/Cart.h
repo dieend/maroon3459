@@ -18,8 +18,8 @@ public:
 	//Cart () {}
 	Cart();
 	Cart (int cart_id, int cust_id, Date& cart_puchase_date);
-	int get_cart_id() const;
-	int get_cust_id() const;
+	int get_cart_id() const;//MA-S3
+	int get_cust_id() const;//MA-S3
    // utility functions
 	string display() const;
 private:
