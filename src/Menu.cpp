@@ -334,7 +334,10 @@ void Menu::find() const
 					break;
 					}
 				} //AS-S1
-				if (i>= (int) prods.size()) throw InvalidData(); //MA-S3
+				if (i>= (int) prods.size()) { //MA-S3
+					cout << "There is no such product.\n";
+					return;
+				}
                 cout << "Total sales for given product : " << prods[i].getTotalSell(cart_items)<< endl;	 //AS-S1
         }
         else if (inp ==2) { // Customer
@@ -353,7 +356,10 @@ void Menu::find() const
         		for (int j=0; j<(int)cart_items.size();j++) {
         			if (cart_items[j].cartId() == cart_ids_of_customer[i]) {
         				int prod_loc = Product::getProductById(prods, cart_items[j].prodId());
-        				if (prod_loc >= (int) prods.size()) throw InvalidData();
+        				if (prod_loc >= (int) prods.size()) {
+        					cout << "There is no such product.\n";
+        					return;
+        				}
         				const Product& prod = prods[prod_loc];
         				total_money += cart_items[j].prodQty()*prod.get_price();
         			}
@@ -473,13 +479,18 @@ void Menu::update()
         	for (int i=0; valid || i<(int)carts.size(); i++) {
         		if (carts[i].get_cart_id() == cart_id) valid = true;
         	}
-        	if (!valid) throw InvalidData();
+        	if (!valid) {
+        		cout << "There is no such cart.\n";
+        		return;
+        	}
         	valid = false;
         	for (int i=0; valid || i<(int)prods.size(); i++) {
         		if (prods[i].get_id() == prod_id) valid = true;
         	}
-        	if (!valid) throw InvalidData();
-        	
+        	if (!valid) {
+        		cout << "There is no such product.\n";
+        		return;
+        	}        	
         	cart_items.push_back(Cart_item(cart_item_id, cart_id, prod_id, prod_qty));// MA-S3
         }
         
