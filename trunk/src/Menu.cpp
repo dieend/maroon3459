@@ -469,6 +469,17 @@ void Menu::update()
         	cin >> prod_id;// MA-S3
         	cout << "  Enter product Qty: ";// MA-S3
         	cin >> prod_qty;// MA-S3
+        	bool valid = false;
+        	for (int i=0; valid || i<(int)carts.size(); i++) {
+        		if (carts[i].get_cart_id() == cart_id) valid = true;
+        	}
+        	if (!valid) throw InvalidData();
+        	valid = false;
+        	for (int i=0; valid || i<(int)prods.size(); i++) {
+        		if (prods[i].get_id() == prod_id) valid = true;
+        	}
+        	if (!valid) throw InvalidData();
+        	
         	cart_items.push_back(Cart_item(cart_item_id, cart_id, prod_id, prod_qty));// MA-S3
         }
         
