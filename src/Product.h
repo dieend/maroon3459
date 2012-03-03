@@ -28,11 +28,14 @@ public:
 	void set_price(double price); //MA-S3
 	// constructors
 	Product (){}
+	Product (const Product& prod);
 	Product (int prod, int cat, string name, double price);
    // utility functions
     string display() const;
 
-	friend istream& operator>>(istream&, Product d);
+	//friend istream& operator>>(istream&, Product d); //SP-S2
+	friend istream& operator>>(istream&, Product& d); // MA-S3: The Product should be a reference, so it's have a &
+	
 	// comparator
 	static bool cheaper(const Product& a, const Product& b); // MA-S3
 	

@@ -28,7 +28,124 @@ void Menu::display_info() const
         cout << "               " << "Selvin Perez\n";
         cout << "\n";
 }
+void Menu::read_test()
+{
+	cout << "Read file name then read store data \n";
+        
+        int n;
+        fstream fs;
+        string filename;
+        // reading carts data
+        cout << "--------------------------------\n";
+        cout << "Reading cart data :\n";
+        cout << "Enter file name for carts data : ";
+       	filename = "carts.dat";
+        cout << filename << endl;
+        // carts.dat
+        fs.open(filename.c_str());
+        if (!fs) {
+                cerr << "can't open file " << filename << endl;
+        } else {
+                fs >> n;
+                carts.clear();
+                Cart tmp;
+                for (int i=0; i<n; i++) {
+                        fs >> tmp;
+                        carts.push_back(tmp);
+                }
+        
+                // reading cart_items data
+                fs >> n;
+                cart_items.clear();
+                Cart_item ci;
+                for (int i=0; i<n; i++) {
+                        fs >> ci;
+                        cart_items.push_back(ci);
+                }
+                fs.close();
+                cout << "Reading Successfull\n";
+        }
+        // finish reading cart and cart item
+   
+   
+	    fstream fsp;
+        int n1,n2;
+        string file_prod_name;
+        Product prod;
+        //-----------------------------------------
+        cout << "--------------------------------\n";
+        cout << "Enter file name for category & product data: "; //MA-A2
+        //cin >> file_prod_name;
+        file_prod_name = "catprd.dat";
+        cout << file_prod_name << endl;
+        cout << "Reading category data...\n";
+        //cout << "Enter file name for product data data : "; MA-A2
+        fsp.open(file_prod_name.c_str());
+        if (!fsp) {
+                cerr<< "can't open file " << file_prod_name << endl;  // MA-A2
+        } 
+        else {
+                fsp >> n1;
+                for (int i=0; i<n1; i++) {
+                        Category cat;
+                        fsp >> cat.cat_id;
+                        fsp >> cat.cat_name;
+                        cats.push_back(cat);
+                }
+                cout << "Reading Category Successfull\n";
+				cout << "-----------------------------------\n";
+				cout << "Reading product data...\n";
+				//cout << "Enter file name for product data data : "; MA-A2
+                fsp >> n2;
+                prods.clear();
+                //for (int i=0; i<n1; i++) { //AS-S1
+                for (int i=0; i<n2; i++) { //MA-S2: you should loop by S2
+                        fsp >> prod;
+                        prods.push_back(prod);
+                }
+                cout << "Reading Product Successfull\n";
+        }       
+        fsp.close();
 
+        
+        cout << "--------------------------------\n";   
+        cout << "Reading customer data\n";
+        //cout<<"Please enter input file name: "; MA-A2
+        cout << "Enter file name for customer data: "; //MA-A2
+    ifstream ifs;
+    string name;
+    name = "cust.dat";
+    cout << name << endl;
+    //cin>>name;
+    ifs.open(name.c_str());
+    //if(!ifs)cerr<<("can't open file, ",name); MA-A2
+    if(!ifs) { // MA-A2
+        // cerr<<("can't open file, ",name); //MA-A2
+        cerr<< "can't open file " << name << endl;
+    } else {
+                int n3;
+                ifs>>n3;
+                int id;
+                int house_n;
+                int z;
+                string cust_name;
+                string strt;
+                //Address address(house_n, strt, z); MA-A2
+                custs.clear();
+                for(int i=0; i<n3;i++){
+                    ifs >> id;
+                    ifs >> cust_name;
+                    ifs >> house_n;
+                    ifs >> strt;
+                    ifs >> z;
+                    Address address(house_n, strt, z); // MA-A2
+                    custs.push_back(Customer(id,cust_name,address));
+                }
+                ifs.close();
+                //cout<< "reading complete\n";
+                cout<< "Reading Successfull\n"; // MA-A2
+        }
+}
 void Menu::read()
 {
         cout << "Read file name then read store data \n";
@@ -72,7 +189,6 @@ void Menu::read()
         int n1,n2;
         string file_prod_name;
         Product prod;
-        Category cat;
         //-----------------------------------------
         cout << "--------------------------------\n";
         cout << "Enter file name for category & product data: "; //MA-A2
@@ -86,17 +202,19 @@ void Menu::read()
         else {
                 fsp >> n1;
                 for (int i=0; i<n1; i++) {
+                        Category cat;
                         fsp >> cat.cat_id;
                         fsp >> cat.cat_name;
                         cats.push_back(cat);
                 }
                 cout << "Reading Category Successfull\n";
-        cout << "-----------------------------------\n";
-        cout << "Reading product data...\n";
-        //cout << "Enter file name for product data data : "; MA-A2
+				cout << "-----------------------------------\n";
+				cout << "Reading product data...\n";
+				//cout << "Enter file name for product data data : "; MA-A2
                 fsp >> n2;
                 prods.clear();
-                for (int i=0; i<n1; i++) {
+                //for (int i=0; i<n1; i++) { //AS-S1
+                for (int i=0; i<n2; i++) { //MA-S2: you should loop by S2
                         fsp >> prod;
                         prods.push_back(prod);
                 }
@@ -148,7 +266,7 @@ void Menu::show() const
         cout << "Show Menu" << endl;
         cout << "1. Show Category and Product" << endl;
         cout << "2. Show Customer Data" << endl;
-        cout << "3. Show Cart Data" << endl;
+        cout << "3. Show Product Data" << endl;
         cout << "Input : ";
         cin >> inp;
         
@@ -168,18 +286,18 @@ void Menu::show() const
                 cout << "Show queries \n";
         }
         else if (inp ==2) { // Customer
-            for (int i = 0; i < (int)custs.size(); i++) {
-              cout<<custs.at(i).display()<<endl;                  
+        	vector<Customer> tmp(custs);
+        	sort(tmp.begin(), tmp.end(), Customer::lexicographic_name);
+            for (int i = 0; i < (int)tmp.size(); i++) {
+              cout<<tmp.at(i).display()<<endl;                  
             }
         }
         
         else if (inp ==3) { // Product
 			vector<Product> tmp(prods);
-			sort(tmp.begin(), tmp.end(), Product::cheaper);
-			for (int i=0; i<(int)prods.size(); i++) {
-				cout << "Product Name: "<< prods[i].get_name() << endl;
-				cout << "Product ID: "<< prods[i].get_id() << endl;
-				cout << "Product Price: "<< prods[i].get_price() << endl;			
+			sort(tmp.begin(), tmp.end(), Product::cheaper);	
+			for (int i=0; i<(int)tmp.size(); i++) {
+				cout << tmp[i].display();
 			}
         }
         
@@ -200,12 +318,10 @@ void Menu::find() const
         
         if (inp == 1) { // Category
                 int i = 0;
-                int val = 0;
                 int prod_id;
-                int sold;
                 cout << "Input Product ID :";
                 cin >> prod_id;
-				for (i = 0; i < prods.size() ; i++) {
+				for (i = 0; i < (int)prods.size() ; i++) {
 					if (prods[i].get_id() == prod_id) {
 					break;
 					}
@@ -229,11 +345,10 @@ void Menu::find() const
 			if (category_id == NULL) {
 				cout << "There is no Category with name " + category_name << endl;
 			} else {
-				int m = 0;
 				double total_sell = 0;
 				vector<const Product*> products = Product::getProductsByCategory(prods,(int)*category_id);
 				for (int i=0; i<(int)products.size(); i++) {
-					total_sell += products[i]->getTotalSell(cart_items);
+					total_sell += products[i]->getTotalSell(cart_items)*products[i]->get_price();
 				}
 				cout << "Total sell products by category " + category_name + " is " << total_sell << endl;
 				delete category_id;
