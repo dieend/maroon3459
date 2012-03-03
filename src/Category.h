@@ -22,7 +22,6 @@ public:
 
 private:
    //constants	
-   //moved to public data
 };
 
 
