@@ -512,4 +512,105 @@ void Menu::update()
 
 }
 
+int Menu::validate() { //AS-C3
+	int stat = 0;
+	int val = 0;
+	cout << "Validating data . . ." << endl;
+	for (int i = 0; i < cart_items.size(); i++) { //AS-C3
+		for (int j = 0; j < prods.size(); j++) {
+			if (cart_items[i].prodId() != prods[j].get_id()) {
+			val++;
+			} //AS-C3
+		}
+		if (val == prods.size()-1) { //AS-C3
+			break;
+			stat = 1;
+			cout << "Cart_ item refers to a non-existent Product" << endl; //AS-C3
+		}
+		else val = 0; //AS-C3
+	}
+	for (int i = 0; i < cart_items.size()-1; i++) { //AS-C3
+		for (int j = i+1; j < cart_items.size(); j++) { 
+			if (cart_items[i].cartId() == cart_items[j].cartId()) {
+			val++; //AS-C3
+			}
+		}
+		if (val == 0) { //AS-C3
+			break;
+			stat = 1;
+			cout << "There is a Cart has less one Cart_item" << endl; //AS-C3
+		}
+		else val = 0; //AS-C3
+	}
+	if (stat == 0) return 1;
+	else return 1;
+	
 
+}
+
+
+
+void Menu::write() { // AS-C3
+	FILE * pFile;
+	char buffer [33]; // AS-C3
+	pFile = fopen ("carts.dat","w");
+	if (pFile!=NULL)
+	{
+		itoa (carts.size(),buffer,10); // AS-C3
+		fputs (buffer,pFile);
+		fputs ("\n",pFile);
+		for (int i=0; i<carts.size(); i++) { // AS-C3
+			
+            fputs (carts[i].save().c_str(),pFile);
+        }
+		fputs ("\n",pFile);
+		itoa (cart_items.size(),buffer,10); // AS-C3
+		fputs (buffer,pFile);
+		fputs ("\n",pFile);
+		for (int i=0; i<cart_items.size(); i++) { // AS-C3
+			
+            fputs (cart_items[i].save().c_str(),pFile);
+        }
+		cout << "Saving carts.dat ...." << endl;
+		fclose (pFile); // AS-C3
+	}
+	
+	pFile = fopen ("catprd.dat","w"); // AS-C3
+	{
+		itoa (cats.size(),buffer,10);
+		fputs (buffer,pFile); // AS-C3
+		fputs ("\n",pFile);
+		for (int i=0; i<cats.size(); i++) {
+            fputs (cats[i].display().c_str(),pFile); // AS-C3
+        }
+		fputs ("\n",pFile);
+		itoa (prods.size(),buffer,10);
+		fputs (buffer,pFile);
+		fputs ("\n",pFile);
+		for (int i=0; i<prods.size(); i++) { // AS-C3
+			 
+            fputs (prods[i].save().c_str(),pFile);
+        }
+		cout << "Saving catprd.dat ...." << endl;
+		fclose (pFile); // AS-C3
+	}
+	
+		pFile = fopen ("cust.dat","w");
+	{
+		itoa (custs.size(),buffer,10);
+		fputs (buffer,pFile);
+		fputs ("\n",pFile); // AS-C3
+		for (int i=0; i<custs.size(); i++) {
+            fputs (custs[i].save().c_str(),pFile);
+        }
+		fputs ("\n",pFile); // AS-C3
+		cout << "Saving cust.dat ...." << endl;
+		fclose (pFile);
+	}
+}
+
+
+void Menu::exit() {
+	
+
+}

@@ -37,6 +37,9 @@ public:
    void update();
    void show() const;
    void find() const;
+   int validate(); // AS-C3
+   void write();
+   void exit();
 
 private:
    //private data

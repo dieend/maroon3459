@@ -22,6 +22,7 @@ public:
 	int get_cust_id() const;//MA-S3
    // utility functions
 	string display() const;
+	string save(); // AS-C3
 private:
    //constants
 
