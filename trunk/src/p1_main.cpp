@@ -43,8 +43,8 @@ try {
          break;
 	  case Menu::Read:
          try {
-            m.read();
-            //m.read_test();  // MA-S3
+            //m.read();
+            m.read_test();  // MA-S3
          } catch (const Menu::InvalidFile& excp) {
             cerr << excp.what() << endl;
          } catch (const Menu::InvalidData& excp) {
@@ -64,7 +64,17 @@ try {
          cout<<"Are you sure you want to exit?\nEnter 1 for yes OR 2 for no\n";
             int q;
             cin>>q;
-            if (q==1)return 0;
+            if (q==1) {
+				if (m.validate() == 1) { // AS-C3
+				m.write(); // AS-C3
+				return 0;
+				}
+				else { // AS-C3
+				cout << "Please fix your data!" << endl; // AS-C3
+				main(); // AS-C3
+				}
+				
+			}
             if (q==2)  main();
             else {
                 cerr << "Invalid input" << endl;

@@ -17,6 +17,7 @@ public:
 	int cartId()const; //MA-S3
 	int prodId()const;//MA-S3
 	int prodQty()const;//MA-S3
+	string save(); // AS-C3
 
 
 private:

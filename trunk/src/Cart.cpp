@@ -17,6 +17,18 @@ string Cart::display() const{
 	string s = ss.str();
 	return s;
 }
+
+string Cart::save(){ // AS-C3
+	stringstream ss;
+	ss << cart_id <<"	"; 
+	ss << cust_id <<"	"; // AS-C3
+	ss << cart_purchase_date.year() << "	"; // AS-C3
+	ss << cart_purchase_date.month() << "	";
+	ss << cart_purchase_date.day() <<endl;
+	string s = ss.str();
+	return s; // AS-C3
+}
+
 ostream& operator<<(ostream& c, Cart d){
 	c << d.display();
 	return c;

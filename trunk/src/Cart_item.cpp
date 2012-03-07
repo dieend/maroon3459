@@ -24,6 +24,17 @@ string Cart_item::display() const{
 	return s;
 }
 
+string Cart_item::save() { // AS-C3
+	stringstream ss;
+	ss << cart_item_id << "	";
+	ss << cart_id << "	";
+	ss << prod_id << "	"; // AS-C3
+	ss << prod_qty << endl;
+	string s = ss.str();
+	return s; // AS-C3
+}
+
+
 ostream& operator<<(ostream& c, Cart_item d){
 	c << d.display();
 	return c;

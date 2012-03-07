@@ -16,6 +16,7 @@ public:
 
    // utility functions
 	string display() const;
+	string save(); //AS-C3
 	int get_id() const;
    static bool lexicographic_name(const Customer& a, const Customer & b); // MA-S3
    static int findCustomerByName(const vector<Customer>& cust, const string& name);  // MA-S3

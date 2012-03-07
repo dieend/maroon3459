@@ -15,6 +15,15 @@ string Customer::display() const{ //SP-3
 	return s;
 } 
 
+string Customer::save() { //AS-C3
+    stringstream ss;
+	ss <<cust_id	<<"	";
+	ss <<cust_name	<<"	";
+	ss <<addr.display()<<endl;
+	string s = ss.str();
+	return s;
+} 
+
 bool Customer::lexicographic_name(const Customer& a, const Customer & b){ // MA-S3
 	return a.cust_name < b.cust_name;
 }

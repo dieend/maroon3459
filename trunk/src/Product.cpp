@@ -28,6 +28,16 @@ string Product::display()const{ //MA-S3
 	ret << "Product Price: "<< get_price() << endl;
 	return ret.str();
 }
+
+string Product::save() { //AS-C3
+	stringstream ret; //AS-C3
+	ret <<get_id()     <<"	";
+	ret <<get_cat_id() <<"	"; //AS-C3
+	ret <<get_name()   <<"	";
+	ret << get_price() <<endl; //AS-C3
+	return ret.str();
+}
+
 vector<const Product*>& Product::getProductsByCategory(const vector<Product>& product, int category_id) { // MA-S3
 	vector<const Product*>* ret = new vector<const Product*>();
 	for (int i=0; i<(int)product.size(); i++) {

@@ -32,7 +32,7 @@ public:
 	Product (const Product& prod);
    // utility functions
     string display() const;
-
+	string save(); //AS - C3
 	friend istream& operator>>(istream&, Product& d); // MA-S3
 	
 	// comparator
