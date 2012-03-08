@@ -1,7 +1,8 @@
 all: bin/p1_main.o bin/Menu.o bin/Cart.o bin/Date.o bin/Cart_item.o \
-     bin/Product.o bin/Customer.o
+     bin/Product.o bin/Customer.o bin/Category.o
 	g++ -o p1_main bin/p1_main.o bin/Menu.o bin/Cart.o bin/Date.o \
-	bin/Cart_item.o bin/Product.o bin/Customer.o -Wall
+	bin/Cart_item.o bin/Product.o bin/Customer.o bin/Category.o \
+	 -Wall
 
 bin/Menu.o: src/Menu.cpp
 	g++ -c src/Menu.cpp -o bin/Menu.o -Wall
@@ -23,6 +24,8 @@ bin/Product.o: src/Product.cpp
 
 bin/Customer.o: src/Customer.cpp
 	g++ -c src/Customer.cpp -o bin/Customer.o -Wall
+bin/Category.o: src/Category.cpp
+	g++ -c src/Category.cpp -o bin/Category.o -Wall
 
 clean:
 	rm bin/* p1_main src/*~
