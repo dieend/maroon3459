@@ -17,6 +17,7 @@ public:
 	string cat_name;
 	// constructors
 	Category () {}
+	Category (int id, string name); //sp-c1
 
     // utility functions
 	string display() const;

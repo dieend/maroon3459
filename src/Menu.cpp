@@ -410,6 +410,9 @@ void Menu::update()
         cout << "1. Add Category and Product" << endl; //AS-S1
         cout << "2. Add Customer Data" << endl;
         cout << "3. Add Cart Data" << endl;
+		cout << "4. Add Category" << endl;//sp-c1
+		cout << "5. Change Product Price" << endl; //sp-c1
+		cout << "6. Delete Product" << endl; //sp-c1
         cout << "Input : "; //AS-S1
         cin >> inp;
         
@@ -459,6 +462,13 @@ void Menu::update()
             cin>> new_street;
             cout<<"      Enter zip code: ";
             cin>> new_zip;
+
+			if(cin.fail()){
+				cout<<'\n'<<"invalid input"<<endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+					return;
+			}
             
             Address new_address(new_house_n,new_street,new_zip);
             Customer new_cust(new_id,new_cust_name,new_address);
@@ -501,6 +511,107 @@ void Menu::update()
         	cart_items.push_back(Cart_item(cart_item_id, cart_id, prod_id, prod_qty));// MA-S3
         }
         
+		else if (inp==4){// new category sp-c1
+			int cat_id;
+			string cat_name;
+			cout<<"Input new category ID: ";
+			cin>> cat_id;
+			if(cin.fail()){
+				cout<<'\n'<<"invalid input; Input intergers only"<<endl;
+				cin.clear();
+				cin.ignore(1000,'\n');
+					return;
+			}
+			cout<<"Input new category name: ";
+			cin>>cat_name;
+			cats.push_back(Category(cat_id,cat_name));
+
+		}
+
+		else if (inp ==5){ // change product price  sp-c1
+			int prod_id, prod_price,cat_id;
+			string prod_name;
+			bool valid = false;
+			cout << "Enter product id: ";
+        	cin >> prod_id;
+        	
+        	valid = false;
+        	for (int i=0; !valid && i<(int)prods.size(); i++) {
+        		if (prods[i].get_id() == prod_id) {				
+					valid = true;
+					cout<<prods[i].display();
+				}
+        	}
+        	if (!valid) {
+        		cout << "There is no such product.\n";
+        		return;
+        	}
+			cout<<"\nEnter new product price: ";
+			cin >> prod_price;
+			
+			if (prod_price <0 || cin.fail()){ 
+				cout<<"Invalid product price \n";
+				cin.clear();
+				cin.ignore(1000,'\n');
+					return;	
+			}
+
+			 for (int i = 0; i < (int)prods.size(); i ++) {
+                        if (prods[i].get_id() == prod_id) {
+							prod_id= prods[i].get_id();
+							 cat_id= prods[i].get_cat_id();
+					      prod_name= prods[i].get_name();
+						    prods.erase(prods.begin()+i);
+			
+						}
+			 }
+						  
+			 prods.push_back(Product(prod_id, cat_id, prod_name,prod_price));
+			 cout<<"\nPrice change successfull\n"; 
+			
+        	
+		}
+
+		else if (inp==6){ //delete product sp-c1
+			int prod_id, y_n;
+			bool valid = false;
+			cout << "   Enter product id to delete product: ";
+        	cin >> prod_id;
+        	
+        	valid = false;
+        	for (int i=0; !valid && i<(int)prods.size(); i++) {
+        		if (prods[i].get_id() == prod_id) {
+					cout<<prods[i].display()<<endl;
+					valid = true;
+        		}
+			}
+        	if (!valid) {
+        		cout << "There is no such product.\n";
+        		return;
+        	}
+
+			cout<<"Are you sure you want to delete this product?\n";
+			cout<<"1.Yes\n2.No"<<endl;
+			cout<<"Please enter your choice: ";
+			cin>>y_n;
+			if(y_n==1){
+			for (int i=0; i<prods.size(); i++){
+				if (prod_id == prods.at(i).get_id()){
+					prods.erase(prods.begin()+i);
+					}
+				}
+				cout<<"Deletion successfull \n";
+			}
+			else if (y_n== 2) return;
+			else {
+				cout<<"invalid input\n";
+				cin.clear();
+				cin.ignore(1000,'\n');
+					return;	
+			}
+
+		}
+
         else {
                 cout << "Wrong Input" << endl;
         }
