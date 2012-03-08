@@ -40,3 +40,12 @@ int Customer::findCustomerByName(const vector<Customer>& cust, const string& nam
 int Customer::get_id() const{  // MA-S3
 	return cust_id;
 }
+
+int Customer::findCustomerById(const vector<Customer>& cust, const int id){
+	for (int i=0; i<(int) cust.size(); i++) {
+		if (id == cust[i].get_id()) {
+			return i;
+		}
+	}
+	return cust.size();
+}

@@ -266,6 +266,7 @@ void Menu::show() const
         cout << "1. Show Category and Product" << endl; //AS-S1
         cout << "2. Show Customer Data" << endl;
         cout << "3. Show Product Data" << endl;
+        cout << "4. Show Product in Cart" << endl;
         cout << "Input : "; //AS-S1
         cin >> inp; //AS-S1
         
@@ -306,7 +307,32 @@ void Menu::show() const
 				cout << tmp[i].display();
 			}
 			//MA-S3
-        }
+        } else if (inp==4){ // product in cart
+			int loc = 0;
+			int cart_id;
+			cout << "Enter cart id: ";
+			cin >> cart_id;
+			for (loc = 0; loc < (int) carts.size(); loc++) {
+				if (carts[loc].get_cart_id() == cart_id) {
+					break;
+				}
+			}
+			if (loc >= (int)carts.size()) {
+					cout << "There is no such cart.\n";
+					return;
+			}
+			
+			for (int i=0; i<(int)cart_items.size(); i++) {
+				if (cart_items[i].cartId() == cart_id) {
+					const Product& p = prods[Product::getProductById(prods, cart_items[i].prodId())];
+					const char* name = p.get_name().c_str();
+					double price = p.get_price();
+					int qty = cart_items[i].prodQty();
+					double total = price*qty;
+					printf("%-15s @%10.2lf %6d %10.2lf\n", name, price, qty, total);
+				}
+			}
+		}
         
         else {
                 cout << "Wrong Input" << endl;
@@ -413,6 +439,9 @@ void Menu::update()
 		cout << "4. Add Category" << endl;//sp-c1
 		cout << "5. Change Product Price" << endl; //sp-c1
 		cout << "6. Delete Product" << endl; //sp-c1
+		cout << "7. Add Cart Item" << endl; //MA-C2
+        cout << "8. Delete Cart Item" << endl;
+
         cout << "Input : "; //AS-S1
         cin >> inp;
         
@@ -509,8 +538,7 @@ void Menu::update()
         	cin >> prod_qty;// MA-S3
 
         	cart_items.push_back(Cart_item(cart_item_id, cart_id, prod_id, prod_qty));// MA-S3
-        }
-        
+        }         
 		else if (inp==4){// new category sp-c1
 			int cat_id;
 			string cat_name;
@@ -595,7 +623,7 @@ void Menu::update()
 			cout<<"Please enter your choice: ";
 			cin>>y_n;
 			if(y_n==1){
-			for (int i=0; i<prods.size(); i++){
+			for (int i=0; i<(int)prods.size(); i++){
 				if (prod_id == prods.at(i).get_id()){
 					prods.erase(prods.begin()+i);
 					}
@@ -610,6 +638,39 @@ void Menu::update()
 					return;	
 			}
 
+		}
+		else if (inp == 7) { // add a new cart MA-C2
+			int cust_id;
+			cout << "Enter customer id: ";
+			cin >> cust_id;
+			int loc = Customer::findCustomerById(custs, cust_id);
+			if (loc >= (int)custs.size()) {
+				cout << " There is no such customer.\n";
+				return;
+			}
+			try {
+				cout << "Enter date of purchase (YY MM DD): ";
+				Date* d = new Date();
+				cin >> (*d);
+				int latest_id = custs[custs.size()-1].get_id();
+				carts.push_back(Cart(latest_id+1, cust_id, *d)); 
+				
+			} catch (const Date::Bad_date& e) {
+				cout << "The date format is invalid.\n";
+				return;
+			}
+		} else if (inp == 8) { // delete cart item MA-C2
+			int cart_item;
+			cout << "Enter cart item id :";
+			cin >> cart_item;
+			for (int i=0; i<(int)cart_items.size(); i++) {
+				if (cart_items[i].cartItemId() == cart_item) {
+					cart_items.erase(cart_items.begin() + i);
+					cout << "Cart item deleted.\n";
+					return;
+				}
+			}
+			cout << "There is no such cart item.\n";
 		}
 
         else {
@@ -627,21 +688,21 @@ int Menu::validate() { //AS-C3
 	int stat = 0;
 	int val = 0;
 	cout << "Validating data . . ." << endl;
-	for (int i = 0; i < cart_items.size(); i++) { //AS-C3
-		for (int j = 0; j < prods.size(); j++) {
+	for (int i = 0; i < (int)cart_items.size(); i++) { //AS-C3
+		for (int j = 0; j < (int)prods.size(); j++) {
 			if (cart_items[i].prodId() != prods[j].get_id()) {
 			val++;
 			} //AS-C3
 		}
-		if (val == prods.size()-1) { //AS-C3
+		if (val == (int)prods.size()-1) { //AS-C3
 			break;
 			stat = 1;
 			cout << "Cart_ item refers to a non-existent Product" << endl; //AS-C3
 		}
 		else val = 0; //AS-C3
 	}
-	for (int i = 0; i < cart_items.size()-1; i++) { //AS-C3
-		for (int j = i+1; j < cart_items.size(); j++) { 
+	for (int i = 0; i < (int)cart_items.size()-1; i++) { //AS-C3
+		for (int j = i+1; j < (int)cart_items.size(); j++) { 
 			if (cart_items[i].cartId() == cart_items[j].cartId()) {
 			val++; //AS-C3
 			}
@@ -663,7 +724,7 @@ int Menu::validate() { //AS-C3
 
 void Menu::write() { // AS-C3
 	FILE * pFile;
-	char buffer [33]; // AS-C3
+	//char buffer [33]; // AS-C3
 	pFile = fopen ("carts.dat","w");
 	if (pFile!=NULL)
 	{
@@ -671,16 +732,16 @@ void Menu::write() { // AS-C3
 		//itoa (carts.size(),buffer,10); // AS-C3
 		//fputs (buffer,pFile);
 		fputs ("\n",pFile);
-		for (int i=0; i<carts.size(); i++) { // AS-C3
+		for (int i=0; i<(int)carts.size(); i++) { // AS-C3
 			
             fputs (carts[i].save().c_str(),pFile);
         }
 		fputs ("\n",pFile);
 		//itoa (cart_items.size(),buffer,10); // AS-C3
 		//fputs (buffer,pFile);
-		fprintf(pFile, cart_items.size()); // MA-C2
+		fprintf(pFile, "%d",cart_items.size()); // MA-C2
 		fputs ("\n",pFile);
-		for (int i=0; i<cart_items.size(); i++) { // AS-C3
+		for (int i=0; i<(int)cart_items.size(); i++) { // AS-C3
 			
             fputs (cart_items[i].save().c_str(),pFile);
         }
@@ -694,7 +755,7 @@ void Menu::write() { // AS-C3
 		//fputs (buffer,pFile); // AS-C3
 		fprintf(pFile, "%d", cats.size());
 		fputs ("\n",pFile);
-		for (int i=0; i<cats.size(); i++) {
+		for (int i=0; i<(int)cats.size(); i++) {
             fputs (cats[i].display().c_str(),pFile); // AS-C3
         }
 		fputs ("\n",pFile);
@@ -702,7 +763,7 @@ void Menu::write() { // AS-C3
 		//fputs (buffer,pFile);
 		fprintf(pFile, "%d", prods.size());
 		fputs ("\n",pFile);
-		for (int i=0; i<prods.size(); i++) { // AS-C3
+		for (int i=0; i<(int)prods.size(); i++) { // AS-C3
 
             fputs (prods[i].save().c_str(),pFile);
         }
@@ -716,7 +777,7 @@ void Menu::write() { // AS-C3
 		//fputs (buffer,pFile);
 		fprintf(pFile,"%d",custs.size());
 		fputs ("\n",pFile); // AS-C3
-		for (int i=0; i<custs.size(); i++) {
+		for (int i=0; i<(int)custs.size(); i++) {
             fputs (custs[i].save().c_str(),pFile);
         }
 		fputs ("\n",pFile); // AS-C3
