@@ -433,7 +433,8 @@ void Menu::update()
 {
      int inp = 0; //AS-S1
         cout << "Update Menu" << endl; //AS-S1
-        cout << "1. Add Category and Product" << endl; //AS-S1
+        //cout << "1. Add Category and Product" << endl; //AS-S1
+        cout << "1. Add Product to exsisting Category" << endl; //sp-c1
         cout << "2. Add Customer Data" << endl;
         cout << "3. Add Cart Data" << endl;
 		cout << "4. Add Category" << endl;//sp-c1
