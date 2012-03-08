@@ -556,16 +556,18 @@ void Menu::write() { // AS-C3
 	pFile = fopen ("carts.dat","w");
 	if (pFile!=NULL)
 	{
-		itoa (carts.size(),buffer,10); // AS-C3
-		fputs (buffer,pFile);
+		fprintf(pFile, "%d", carts.size()); // MA-C2
+		//itoa (carts.size(),buffer,10); // AS-C3
+		//fputs (buffer,pFile);
 		fputs ("\n",pFile);
 		for (int i=0; i<carts.size(); i++) { // AS-C3
 			
             fputs (carts[i].save().c_str(),pFile);
         }
 		fputs ("\n",pFile);
-		itoa (cart_items.size(),buffer,10); // AS-C3
-		fputs (buffer,pFile);
+		//itoa (cart_items.size(),buffer,10); // AS-C3
+		//fputs (buffer,pFile);
+		fprintf(pFile, cart_items.size()); // MA-C2
 		fputs ("\n",pFile);
 		for (int i=0; i<cart_items.size(); i++) { // AS-C3
 			
@@ -577,18 +579,20 @@ void Menu::write() { // AS-C3
 	
 	pFile = fopen ("catprd.dat","w"); // AS-C3
 	{
-		itoa (cats.size(),buffer,10);
-		fputs (buffer,pFile); // AS-C3
+		//itoa (cats.size(),buffer,10);
+		//fputs (buffer,pFile); // AS-C3
+		fprintf(pFile, "%d", cats.size());
 		fputs ("\n",pFile);
 		for (int i=0; i<cats.size(); i++) {
             fputs (cats[i].display().c_str(),pFile); // AS-C3
         }
 		fputs ("\n",pFile);
-		itoa (prods.size(),buffer,10);
-		fputs (buffer,pFile);
+		//itoa (prods.size(),buffer,10);
+		//fputs (buffer,pFile);
+		fprintf(pFile, "%d", prods.size());
 		fputs ("\n",pFile);
 		for (int i=0; i<prods.size(); i++) { // AS-C3
-			 
+
             fputs (prods[i].save().c_str(),pFile);
         }
 		cout << "Saving catprd.dat ...." << endl;
@@ -597,8 +601,9 @@ void Menu::write() { // AS-C3
 	
 		pFile = fopen ("cust.dat","w");
 	{
-		itoa (custs.size(),buffer,10);
-		fputs (buffer,pFile);
+		//itoa (custs.size(),buffer,10);
+		//fputs (buffer,pFile);
+		fprintf(pFile,"%d",custs.size());
 		fputs ("\n",pFile); // AS-C3
 		for (int i=0; i<custs.size(); i++) {
             fputs (custs[i].save().c_str(),pFile);
