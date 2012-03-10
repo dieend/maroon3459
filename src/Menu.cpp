@@ -705,9 +705,10 @@ int Menu::validate() { //AS-C3
 			} //AS-C3
 		}
 		if (val == (int)prods.size()-1) { //AS-C3
-			break;
+			//break;
 			stat = 1;
 			cout << "Cart_ item refers to a non-existent Product" << endl; //AS-C3
+			break; // MA-C2
 		}
 		else val = 0; //AS-C3
 	}
@@ -718,9 +719,10 @@ int Menu::validate() { //AS-C3
 			}
 		}
 		if (val == 0) { //AS-C3
-			break;
+			//break;
 			stat = 1;
 			cout << "There is a Cart has less one Cart_item" << endl; //AS-C3
+			break; // MA-C2
 		}
 		else val = 0; //AS-C3
 	}
