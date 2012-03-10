@@ -43,8 +43,8 @@ try {
          break;
 	  case Menu::Read:
          try {
-            //m.read();
-            m.read_test();  // MA-S3
+            m.read();
+            //m.read_test();  // MA-S3
          } catch (const Menu::InvalidFile& excp) {
             cerr << excp.what() << endl;
          } catch (const Menu::InvalidData& excp) {
