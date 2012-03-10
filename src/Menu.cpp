@@ -624,9 +624,18 @@ void Menu::update()
 			cout<<"Please enter your choice: ";
 			cin>>y_n;
 			if(y_n==1){
-			for (int i=0; i<(int)prods.size(); i++){
-				if (prod_id == prods.at(i).get_id()){
-					prods.erase(prods.begin()+i);
+				for (int i=0; i<(int)prods.size(); i++){
+					if (prod_id == prods.at(i).get_id()){
+						prods.erase(prods.begin()+i);
+					}
+				}
+				// also delete product in cart items
+				for (vector<Cart_item>::iterator i=cart_items.begin(); 
+							i!=cart_items.end(); ) { //MA-C2
+					if (prod_id == (*i).prodId()){ // MA-C2
+						i = cart_items.erase(i); // MA-C2
+					} else {// MA-C2
+						i++;// MA-C2
 					}
 				}
 				cout<<"Deletion successfull \n";
