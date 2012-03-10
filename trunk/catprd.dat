@@ -1,21 +1,20 @@
-5			
-2300	Featurephones		
-2500	Smartphones		
-3000	Accessories		
-1000	Laptops		
-1500	Tablets		
-			
-			
-20			
-120012	2300	ExpressMusic	249
+6
+2300	Featurephones
+2500	Smartphones
+3000	Accessories
+1000	Laptops
+1500	Tablets
+1000	TV
+
+19
 100015	2500	Red	359
 150001	2500	iPhone	999
 200003	2500	Storm	319
 150089	2300	BlackBerry8120	179
 102200	2300	W30Purple	69.99
-009548	3000	Bluetooth	48.99
-007001	3000	Charger	2.99
-009548	3000	Earbuds	17.59
+9548	3000	Bluetooth	48.99
+7001	3000	Charger	2.99
+9548	3000	Earbuds	17.59
 304050	1000	Dell	369.99
 354555	1000	Apple	1500
 384858	1000	HP	799
@@ -26,4 +25,4 @@
 412983	1500	Leveno	249
 493874	1500	Toshiba	299
 417562	1500	Sony	299
-481739	1500	GateWay	251.4
+481739	1500	GateWay	251
