@@ -726,6 +726,13 @@ int Menu::validate() { //AS-C3
 		}
 		else val = 0; //AS-C3
 	}
+	for (int i = 0; i< (int) prods.size(); i++) {
+		if (prods[i].get_price() < 0) {
+			stat = 1;
+			cout << "There is a product has price less than zero" << endl;
+			break;
+		}
+	}
 	if (stat == 0) return 1;
 	else return 1;
 	
