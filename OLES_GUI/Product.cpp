@@ -10,31 +10,31 @@ Product::Product (int prod, int cat, string name, double price) { //AS-S1
 } 
 
 Product::Product(const Product& prod) {  // MA-S3
-	prod_id = prod.get_id();
+	prod_id = prod.product_id();
 	cat_id = prod.get_cat_id();
 	prod_name = prod.get_name();
-	prod_price = prod.get_price();
+	prod_price = prod.product_cost();
 }
 
-bool Product::cheaper(const Product& a, const Product& b){ //MA-S3
-	return a.get_price() < b.get_price();//MA-S3
+bool Product::SortProductsByPrice(const Product& a, const Product& b){ //MA-S3
+	return a.product_cost() < b.product_cost();//MA-S3
 }
 
 string Product::display()const{ //MA-S3
 	stringstream ret;
 	ret << "----\n";
-	ret << "Product ID: "<< get_id() << endl;
+	ret << "Product ID: "<< product_id() << endl;
 	ret << "Product Name: "<< get_name() << endl;
-	ret << "Product Price: "<< get_price() << endl;
+	ret << "Product Price: "<< product_cost() << endl;
 	return ret.str();
 }
 
 string Product::save() { //AS-C3
 	stringstream ret; //AS-C3
-	ret <<get_id()     <<"	";
+	ret <<product_id()     <<"	";
 	ret <<get_cat_id() <<"	"; //AS-C3
 	ret <<get_name()   <<"	";
-	ret << get_price() <<endl; //AS-C3
+	ret << product_cost() <<endl; //AS-C3
 	return ret.str();
 }
 
@@ -56,7 +56,7 @@ istream& operator>>(istream& fsp, Product& prod) { // MA-S3
 }
 
 
-int Product::get_id() const{
+int Product::product_id() const{
 	return prod_id; //AS-S1
 } // MA-S3
 int Product::get_cat_id() const{
@@ -65,18 +65,9 @@ int Product::get_cat_id() const{
 string Product::get_name() const{
 	return prod_name; //AS-S1
 } // MA-S3
-double Product::get_price() const{
-	return prod_price; //AS-S1
-} //MA-S3
-
-int Product::product_id() const{
-	return prod_id; //AS-S1
-}
-
 double Product::product_cost() const{
 	return prod_price; //AS-S1
-}
-
+} //MA-S3
 
 
 void Product::set_id(int id){
@@ -94,7 +85,7 @@ void Product::set_price(double price){
 
 int Product::getProductById(const vector<Product>& products, int id) {
 	for (int i=0; i<(int)products.size(); i++) {
-		if (products[i].get_id() == id) return i;
+		if (products[i].product_id() == id) return i;
 	}
 	return products.size();
 }
@@ -110,8 +101,8 @@ int Product::getProductByName(const vector<Product>& products, const string& nam
 double Product::getTotalSell(const vector<Cart_item>& cart_items) const {
 	int temp = 0;
 	for (int i = 0; i < (int)cart_items.size() ; i++ ) {
-		if (prod_id == cart_items[i].prodId()) {
-			temp = temp + cart_items[i].prodQty(); //AS-S1
+		if (prod_id == cart_items[i].get_prod_id()) {
+			temp = temp + cart_items[i].get_prod_qty(); //AS-S1
 		}
 	}
 	return prod_price*temp; //AS-S1

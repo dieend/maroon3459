@@ -1,6 +1,7 @@
 #ifndef ADDRESS_H_
 #define ADDRESS_H_
 #include <string>
+#include <sstream>
 #include <stdio.h>
 using namespace std;
 
@@ -10,13 +11,8 @@ public:
         string street_name;
         int zip;
         
-        Street_address (int n, string s, int z): house_num(n), street_name(s), zip(z){}
+        Street_address(int n, string s, int z): house_num(n), street_name(s), zip(z){}
 
-		string display() const{
-        stringstream ss;
-		ss <<house_num<<" "<<street_name<<" "<<zip;
-		string s = ss.str();
-		return s;
-        }
+        string display() const;
 };
 #endif //ADDRESS_H_

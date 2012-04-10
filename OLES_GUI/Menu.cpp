@@ -87,10 +87,11 @@ void Menu::read_test()   // MA-S3
         else {
                 fsp >> n1;
                 for (int i=0; i<n1; i++) {
-                        Category cat;
-                        fsp >> cat.cat_id;
-                        fsp >> cat.cat_name;
-                        cats.push_back(cat);
+                    int id;
+                    string name;
+                    fsp >> id;
+                    fsp >> name;
+                    cats.push_back(Category(id,name));
                 }
                 cout << "Reading Category Successfull\n";
 				cout << "-----------------------------------\n";
@@ -202,10 +203,11 @@ void Menu::read()
         else {
                 fsp >> n1; //AS-A3
                 for (int i=0; i<n1; i++) {
-                        Category cat;
-                        fsp >> cat.cat_id;
-                        fsp >> cat.cat_name;
-                        cats.push_back(cat);
+                        int id;
+                        string name;
+                        fsp >> id;
+                        fsp >> name;
+                        cats.push_back(Category(id,name));
                 }
                 cout << "Reading Category Successfull\n";
 				cout << "-----------------------------------\n";
@@ -272,12 +274,12 @@ void Menu::show() const
         
         if (inp == 1) { //AS-S1
                 for (int i = 0; i < (int)cats.size(); i++) { //AS-S1
-                        cout << "Category ID : "<< cats[i].cat_id << endl; //AS-S1
-                        cout << "Category Name : "<< cats[i].cat_name << endl; //AS-S1
+                        cout << "Category ID : "<< cats[i].get_id() << endl; //AS-S1
+                        cout << "Category Name : "<< cats[i].get_name() << endl; //AS-S1
                         cout << "+++++++++++++++++++++++++++++++" << endl;
                         cout << "Products : " << endl; //AS-S1
                         for (int j = 0; j < (int)prods.size(); j++) {
-                                if (prods[j].get_cat_id() == cats[i].cat_id) {
+                                if (prods[j].get_cat_id() == cats[i].get_id()) {
                                         cout << prods[j].display();
                                 }
                         }
@@ -287,7 +289,7 @@ void Menu::show() const
         }
         else if (inp ==2) { // Customer
         	vector<Customer> tmp(custs); //MA-S3
-        	sort(tmp.begin(), tmp.end(), Customer::lexicographic_name); //MA-S3
+        	sort(tmp.begin(), tmp.end(), Customer::SortCustomersByName); //MA-S3
             for (int i = 0; i < (int)tmp.size(); i++) { //MA-S3
               cout<<tmp.at(i).display()<<endl;          //MA-S3        
             }//MA-S3
@@ -302,7 +304,7 @@ void Menu::show() const
         else if (inp ==3) { // Product
         	//MA-S3
 			vector<Product> tmp(prods);
-			sort(tmp.begin(), tmp.end(), Product::cheaper);	
+			sort(tmp.begin(), tmp.end(), Product::SortProductsByPrice);	
 			for (int i=0; i<(int)tmp.size(); i++) {
 				cout << tmp[i].display();
 			}
@@ -323,11 +325,11 @@ void Menu::show() const
 			}
 			
 			for (int i=0; i<(int)cart_items.size(); i++) {
-				if (cart_items[i].cartId() == cart_id) {
-					const Product& p = prods[Product::getProductById(prods, cart_items[i].prodId())];
+				if (cart_items[i].get_cart_id() == cart_id) {
+					const Product& p = prods[Product::getProductById(prods, cart_items[i].get_prod_id())];
 					const char* name = p.get_name().c_str();
-					double price = p.get_price();
-					int qty = cart_items[i].prodQty();
+					double price = p.product_cost();
+					int qty = cart_items[i].get_prod_qty();
 					double total = price*qty;
 					printf("%-15s @%10.2lf %6d %10.2lf\n", name, price, qty, total);
 				}
@@ -356,7 +358,7 @@ void Menu::find() const
                 cout << "Input Product ID :";
                 cin >> prod_id; //AS-S1
 				for (i = 0; i < (int)prods.size() ; i++) {
-					if (prods[i].get_id() == prod_id) { //AS-S1
+					if (prods[i].product_id() == prod_id) { //AS-S1
 					break;
 					}
 				} //AS-S1
@@ -380,14 +382,14 @@ void Menu::find() const
         	double total_money = 0;
         	for (int i=0; i<(int)cart_ids_of_customer.size(); i++) {
         		for (int j=0; j<(int)cart_items.size();j++) {
-        			if (cart_items[j].cartId() == cart_ids_of_customer[i]) {
-        				int prod_loc = Product::getProductById(prods, cart_items[j].prodId());
+        			if (cart_items[j].get_cart_id() == cart_ids_of_customer[i]) {
+        				int prod_loc = Product::getProductById(prods, cart_items[j].get_prod_id());
         				if (prod_loc >= (int) prods.size()) {
         					cout << "There is no such product.\n";
         					return;
         				}
         				const Product& prod = prods[prod_loc];
-        				total_money += cart_items[j].prodQty()*prod.get_price();
+        				total_money += cart_items[j].get_prod_qty()*prod.product_cost();
         			}
         		}
         	}
@@ -402,9 +404,9 @@ void Menu::find() const
         	cout << "Input Category Name: ";  // MA-SA3
 			cin >> category_name;
 			for (int i=0; i<(int) cats.size(); i++) { //MA-S3
-				if (category_name == cats[i].cat_name) {
+				if (category_name == cats[i].get_name()) {
 					category_id = new int;
-					*category_id = cats[i].cat_id; //MA-S3
+					*category_id = cats[i].get_id(); //MA-S3
 				}
 			}
 			if (category_id == NULL) {
@@ -457,7 +459,7 @@ void Menu::update()
                 cin >> cat_id; //AS-S1
                 
                 for (int i = 0; i < (int)cats.size(); i ++) { //AS-S1
-                        if (cats[i].cat_id == cat_id) {
+                        if (cats[i].get_id() == cat_id) {
                                 val = 1;
                                 break; //AS-S1
                         } //AS-S1
@@ -527,7 +529,7 @@ void Menu::update()
         	
         	valid = false;
         	for (int i=0; !valid && i<(int)prods.size(); i++) {
-        		if (prods[i].get_id() == prod_id) valid = true;
+        		if (prods[i].product_id() == prod_id) valid = true;
         	}
         	if (!valid) {
         		cout << "There is no such product.\n";
@@ -566,7 +568,7 @@ void Menu::update()
         	
         	valid = false;
         	for (int i=0; !valid && i<(int)prods.size(); i++) {
-        		if (prods[i].get_id() == prod_id) {				
+        		if (prods[i].product_id() == prod_id) {				
 					valid = true;
 					cout<<prods[i].display();
 				}
@@ -586,8 +588,8 @@ void Menu::update()
 			}
 
 			 for (int i = 0; i < (int)prods.size(); i ++) {
-                        if (prods[i].get_id() == prod_id) {
-							prod_id= prods[i].get_id();
+                        if (prods[i].product_id() == prod_id) {
+							prod_id= prods[i].product_id();
 							 cat_id= prods[i].get_cat_id();
 					      prod_name= prods[i].get_name();
 						    prods.erase(prods.begin()+i);
@@ -609,7 +611,7 @@ void Menu::update()
         	
         	valid = false;
         	for (int i=0; !valid && i<(int)prods.size(); i++) {
-        		if (prods[i].get_id() == prod_id) {
+        		if (prods[i].product_id() == prod_id) {
 					cout<<prods[i].display()<<endl;
 					valid = true;
         		}
@@ -625,14 +627,14 @@ void Menu::update()
 			cin>>y_n;
 			if(y_n==1){
 				for (int i=0; i<(int)prods.size(); i++){
-					if (prod_id == prods.at(i).get_id()){
+					if (prod_id == prods.at(i).product_id()){
 						prods.erase(prods.begin()+i);
 					}
 				}
 				// also delete product in cart items
 				for (vector<Cart_item>::iterator i=cart_items.begin(); 
 							i!=cart_items.end(); ) { //MA-C2
-					if (prod_id == (*i).prodId()){ // MA-C2
+					if (prod_id == (*i).get_prod_id()){ // MA-C2
 						i = cart_items.erase(i); // MA-C2
 					} else {// MA-C2
 						i++;// MA-C2
@@ -665,7 +667,7 @@ void Menu::update()
 				int latest_id = custs[custs.size()-1].get_id();
 				carts.push_back(Cart(latest_id+1, cust_id, *d)); 
 				
-			} catch (const Date::Bad_date& e) {
+			} catch (const Date::Invalid& e) {
 				cout << "The date format is invalid.\n";
 				return;
 			}
@@ -674,7 +676,7 @@ void Menu::update()
 			cout << "Enter cart item id :";
 			cin >> cart_item;
 			for (int i=0; i<(int)cart_items.size(); i++) {
-				if (cart_items[i].cartItemId() == cart_item) {
+				if (cart_items[i].get_item_id() == cart_item) {
 					cart_items.erase(cart_items.begin() + i);
 					cout << "Cart item deleted.\n";
 					return;
@@ -700,7 +702,7 @@ int Menu::validate() { //AS-C3
 	cout << "Validating data . . ." << endl;
 	for (int i = 0; i < (int)cart_items.size(); i++) { //AS-C3
 		for (int j = 0; j < (int)prods.size(); j++) {
-			if (cart_items[i].prodId() != prods[j].get_id()) {
+			if (cart_items[i].get_prod_id() != prods[j].product_id()) {
 			val++;
 			} //AS-C3
 		}
@@ -714,7 +716,7 @@ int Menu::validate() { //AS-C3
 	}
 	for (int i = 0; i < (int)cart_items.size()-1; i++) { //AS-C3
 		for (int j = i+1; j < (int)cart_items.size(); j++) { 
-			if (cart_items[i].cartId() == cart_items[j].cartId()) {
+			if (cart_items[i].get_cart_id() == cart_items[j].get_cart_id()) {
 			val++; //AS-C3
 			}
 		}
@@ -727,7 +729,7 @@ int Menu::validate() { //AS-C3
 		else val = 0; //AS-C3
 	}
 	for (int i = 0; i< (int) prods.size(); i++) {
-		if (prods[i].get_price() < 0) {
+		if (prods[i].product_cost() < 0) {
 			stat = 1;
 			cout << "There is a product has price less than zero" << endl;
 			break;

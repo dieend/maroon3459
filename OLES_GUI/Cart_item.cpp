@@ -46,16 +46,16 @@ istream& operator>>(istream& c, Cart_item& d){
 	return c;
 }
 
-int Cart_item::cartItemId() const{ //MA-S3
+int Cart_item::get_item_id() const{ //MA-S3
 	return cart_item_id;
 }
-int Cart_item::cartId()const { //MA-S3
+int Cart_item::get_cart_id()const { //MA-S3
 	return cart_id;
 }
-int Cart_item::prodId()const { //MA-S3
+int Cart_item::get_prod_id()const { //MA-S3
 	return prod_id;
 }
-int Cart_item::prodQty()const { //MA-S3
+int Cart_item::get_prod_qty()const { //MA-S3
 	return prod_qty;
 }
 

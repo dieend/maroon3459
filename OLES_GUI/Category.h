@@ -12,21 +12,19 @@ using namespace std;
 
 struct Category {
 public:
-   //data
-	int cat_id;
-	string cat_name;
-	// constructors
-	Category () {}
-	Category (int id, string name); //sp-c1
-
+    //data
+    int get_id() const;
+    // constructors
+    Category () {}
+    Category (int id, string name); //sp-c1
+    string get_name() const;
     // utility functions
-	string display() const;
-	int get_id() const;
-	string get_name() const;
-
-
+    string display() const;
+    static bool SortCategoriesByID (const Category& a, const Category& b);
 private:
-   //constants	
+    int cat_id;
+    string cat_name;
+   
 };
 
 

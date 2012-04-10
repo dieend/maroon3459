@@ -90,7 +90,7 @@ void Store_menu::show() const
 			//B.1 list all categories sorted by id
 			cout << cats.size() << " categories sorted by id\n";
 			vector<Category> cpycats = cats;
-			sort(cpycats.begin(), cpycats.end(), SortCategoriesByID());
+			sort(cpycats.begin(), cpycats.end(), Category::SortCategoriesByID);
 			for (int i = 0; i< (int) cpycats.size(); ++i)
 				cout << cpycats[i].display() << " " << count_prods(cpycats[i].get_id()) << endl;// look up and print all cat info
 			cout << endl;
@@ -101,7 +101,7 @@ void Store_menu::show() const
 			//B.2 list all customers sorted by name
 			cout << custs.size() << " customers sorted by name\n";
 			vector<Customer> cpycusts = custs;
-			sort(cpycusts.begin(), cpycusts.end(), SortCustomersByName());
+			sort(cpycusts.begin(), cpycusts.end(), Customer::SortCustomersByName);
 			for (int i = 0; i< (int) cpycusts.size(); ++i)
 				cout << cpycusts[i].display() << endl;// look up and print all customer info
 			cout << endl;
@@ -114,7 +114,7 @@ void Store_menu::show() const
 			//B.3 list all products sorted by price
 			cout << prods.size() << " products sorted by price\n";
 			vector<Product> cpyprods = prods;
-			sort(cpyprods.begin(), cpyprods.end(), SortProductsByPrice());
+			sort(cpyprods.begin(), cpyprods.end(), Product::SortProductsByPrice);
 			for (int i = 0; i< (int) cpyprods.size(); ++i)
 				cout << cpyprods[i].display() << endl;// look up and print all product info
 			cout << endl;
@@ -155,7 +155,7 @@ void Store_menu::find() const
 				{
 					//add this product sales to the sales total
 					int prod_id = prods[i].product_id();
-					double prod_price = prods[i].get_price();
+					double prod_price = prods[i].product_cost();
 					for (int j = 0; j < (int)cart_items.size(); ++j)
 						//select a cart item for this product
 						if(cart_items[j].get_prod_id() == prod_id)
@@ -224,7 +224,7 @@ void Store_menu::find() const
 				if(prods[n].product_id() == prod_id) break;
 			if(!(n < (int)prods.size() || 0 == prods.size())||!cin) throw InvalidData();//B.3 added check for 0 and !cin
 			double sales_total = 0;
-			double prod_price = prods[n].get_price();
+			double prod_price = prods[n].product_cost();
 			//total up all product sales for this product
 			for (int j = 0; j < (int)cart_items.size(); ++j)
 				//select a cart item for this product
@@ -421,6 +421,67 @@ string Store_menu::show_button(Msg_type type)
 		throw InvalidType();
 }
 }
+
+	void Store_menu::write() {
+		FILE * pFile;
+		pFile = fopen ("carts.dat","w");
+		if (pFile!=NULL)
+		{
+			fprintf(pFile, "%d", carts.size()); // MA-C2
+			fputs ("\n",pFile);
+			for (int i=0; i<(int)carts.size(); i++) { // AS-C3
+			
+				fputs (carts[i].save().c_str(),pFile);
+			}
+			fputs ("\n",pFile);
+			//itoa (cart_items.size(),buffer,10); // AS-C3
+			//fputs (buffer,pFile);
+			fprintf(pFile, "%d",cart_items.size()); // MA-C2
+			fputs ("\n",pFile);
+			for (int i=0; i<(int)cart_items.size(); i++) { // AS-C3
+			
+				fputs (cart_items[i].save().c_str(),pFile);
+			}
+			cout << "Saving carts.dat ...." << endl;
+			fclose (pFile); // AS-C3
+		}
+	
+		pFile = fopen ("catprd.dat","w"); // AS-C3
+		{
+			//itoa (cats.size(),buffer,10);
+			//fputs (buffer,pFile); // AS-C3
+			fprintf(pFile, "%d", cats.size());
+			fputs ("\n",pFile);
+			for (int i=0; i<(int)cats.size(); i++) {
+				fputs (cats[i].display().c_str(),pFile); // AS-C3
+			}
+			fputs ("\n",pFile);
+			//itoa (prods.size(),buffer,10);
+			//fputs (buffer,pFile);
+			fprintf(pFile, "%d", prods.size());
+			fputs ("\n",pFile);
+			for (int i=0; i<(int)prods.size(); i++) { // AS-C3
+
+				fputs (prods[i].save().c_str(),pFile);
+			}
+			cout << "Saving catprd.dat ...." << endl;
+			fclose (pFile); // AS-C3
+		}
+	
+			pFile = fopen ("cust.dat","w");
+		{
+			//itoa (custs.size(),buffer,10);
+			//fputs (buffer,pFile);
+			fprintf(pFile,"%d",custs.size());
+			fputs ("\n",pFile); // AS-C3
+			for (int i=0; i<(int)custs.size(); i++) {
+				fputs (custs[i].save().c_str(),pFile);
+			}
+			fputs ("\n",pFile); // AS-C3
+			cout << "Saving cust.dat ...." << endl;
+			fclose (pFile);
+		}
+	}
 /*
 string Store_menu::show_customers(void)
 {
