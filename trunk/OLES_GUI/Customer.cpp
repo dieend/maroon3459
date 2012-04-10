@@ -5,14 +5,16 @@
 
 Customer::Customer (int id, string n, Street_address a): cust_id(id), cust_name(n), addr(a) {
 }
-
+string Customer::get_name() const{
+    return cust_name;
+}
 string Customer::display() const{ //SP-3
     stringstream ss;
-	ss << cust_name<<endl;
-	ss <<"Customer ID: "<<cust_id<<"    Address: "<< addr.display()<<endl;
-	ss <<"---------------------------------\n";
-	string s = ss.str();
-	return s;
+    ss << cust_name<<endl;
+    ss <<"Customer ID: "<<cust_id<<"    Address: "<< addr.display()<<endl;
+    ss <<"---------------------------------\n";
+    string s = ss.str();
+    return s;
 } 
 
 string Customer::save() { //AS-C3
@@ -24,7 +26,7 @@ string Customer::save() { //AS-C3
 	return s;
 } 
 
-bool Customer::lexicographic_name(const Customer& a, const Customer & b){ // MA-S3
+bool Customer::SortCustomersByName(const Customer& a, const Customer & b){ // MA-S3
 	return a.cust_name < b.cust_name;
 }
 

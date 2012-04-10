@@ -1,7 +1,7 @@
 #include "Cart.h"
 
 //MA-A2
-Cart::Cart (int cart_id, int cust_id, Date& cpd){
+Cart::Cart (int cart_id, int cust_id, Date cpd){
 	this->cart_id = cart_id;
 	this->cust_id = cust_id;
 	this->cart_purchase_date = cpd;

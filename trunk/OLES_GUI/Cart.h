@@ -6,10 +6,11 @@
 #define CART_H_
 
 //other types
-#include "Date.h"				//uncomment once you have added the type definition
+#include "Chrono.h"				//uncomment once you have added the type definition
 #include <string>
+#include <sstream>
 using namespace std;
-
+using namespace Chrono;
 struct Cart {
 public:
 	//data
@@ -17,7 +18,7 @@ public:
 	// constructors
 	//Cart () {}
 	Cart();
-	Cart (int cart_id, int cust_id, Date& cart_puchase_date);
+	Cart (int cart_id, int cust_id, Chrono::Date cart_puchase_date);
 	int get_cart_id() const;//MA-S3
 	int get_cust_id() const;//MA-S3
    // utility functions
