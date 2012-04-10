@@ -250,12 +250,12 @@ void do_about_box(Graph_lib::Window& w)
 	Graph_lib::Window ab(Point(w.x()+100, w.y()+50), 700, 400, "About Box");
 	ab.color(Color::white);
 	ab.callback((Fl_Callback*)Menu_Bar_CB, Address (Close_about_box));
-	Text msg(Point(15,50), "Ward Project 2: On-line Store Sales Reporting Program");
+	Text msg(Point(15,50), "Maroon-345-9: On-line Store Sales Reporting Program");
 	msg.set_color(Color::black);
 	ab.attach(msg);
 
-	Image al(Point(10,100),"snow_cpp.gif");
-    al.set_mask(Point(10,10),200,400);  
+	Image al(Point(10,100),"aldo.jpg");
+    al.set_mask(Point(50,10),200,400);  
 	ab.attach(al);
 	Text msgal(Point(15,360), "Aldo Suwandi");
 	msgal.set_color(Color::black);
@@ -263,8 +263,8 @@ void do_about_box(Graph_lib::Window& w)
 	msgal.set_font(Font::screen_bold);
 	ab.attach(msgal);
 
-	Image ad(Point(240,100),"snow_cpp.gif");
-    ad.set_mask(Point(10,10),200,400);  
+	Image ad(Point(240,100),"adin.jpg");
+    ad.set_mask(Point(50,10),200,400);  
 	ab.attach(ad);
 	Text msgad(Point(240,360), "Muhammad Adinata");
 	msgad.set_color(Color::black);
