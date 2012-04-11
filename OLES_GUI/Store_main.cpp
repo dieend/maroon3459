@@ -1,4 +1,3 @@
-
 #include "Simple_window.h"
 #include "Graph.h"
 #include <FL/Fl_Menu_Bar.H>
@@ -218,7 +217,16 @@ int main()
 				case Read_category_products:
 					do_read(sw, m, "catprd.dat", "Open Catelog/Product File", Read_category_products);
 					break;
-				case About_info:
+				case Show_categories:
+					t.set_buffer(m.show_button((Msg_type) Categories_button).c_str());
+					break;
+				case Show_customers:
+					t.set_buffer(m.show_button((Msg_type) Customers_button).c_str());
+					break;
+				case Show_products:
+					t.set_buffer(m.show_button((Msg_type) Products_button).c_str());
+					break;
+        case About_info:
 					do_about_box(sw);
 					break;
 				case Customers_button: case Carts_button: case Categories_button: case Cart_items_button: case Products_button:
