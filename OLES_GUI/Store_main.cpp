@@ -91,6 +91,8 @@ Fl_Menu_Item menu_bar[] = {
  {"Categories", 0,  (Fl_Callback*)Main_Window_CB, Address (Show_categories), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"Customers", 0,  (Fl_Callback*)Main_Window_CB, Address (Show_customers), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"Products", 0,  (Fl_Callback*)Main_Window_CB, Address (Show_products), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Carts", 0,  (Fl_Callback*)Main_Window_CB, Address (Show_carts), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"Cart items", 0,  (Fl_Callback*)Main_Window_CB, Address (Show_cart_items), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Find", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {"Category Sales", 0,  (Fl_Callback*)Main_Window_CB, Address (Find_category_sales), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -224,8 +226,14 @@ int main()
 					t.set_buffer(m.show_button((Msg_type) Customers_button).c_str());
 					break;
 				case Show_products:
-					t.set_buffer(m.show_button((Msg_type) Products_button).c_str());
+					t.set_buffer(m.show_button((Msg_type) Products_button).c_str());        
 					break;
+				case Show_carts:
+					t.set_buffer(m.show_button((Msg_type) Carts_button).c_str());
+          break;
+				case Show_cart_items:
+					t.set_buffer(m.show_button((Msg_type) Cart_items_button).c_str());
+          break;          
         case About_info:
 					do_about_box(sw);
 					break;
