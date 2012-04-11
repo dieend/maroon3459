@@ -230,11 +230,11 @@ int main()
 					break;
 				case Show_carts:
 					t.set_buffer(m.show_button((Msg_type) Carts_button).c_str());
-          break;
+					break;
 				case Show_cart_items:
 					t.set_buffer(m.show_button((Msg_type) Cart_items_button).c_str());
-          break;          
-        case About_info:
+					break;          
+				case About_info:
 					do_about_box(sw);
 					break;
 				case Customers_button: case Carts_button: case Categories_button: case Cart_items_button: case Products_button:
