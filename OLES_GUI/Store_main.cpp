@@ -245,7 +245,7 @@ int main()
 	}
 }
 //show about box info window
-void do_about_box(Graph_lib::Window& w) 
+void do_about_box(Graph_lib::Window& w) //AS-1
 {
 	Graph_lib::Window ab(Point(w.x()+100, w.y()+50), 700, 400, "About Box");
 	ab.color(Color::white);
@@ -272,8 +272,8 @@ void do_about_box(Graph_lib::Window& w)
 	msgad.set_font(Font::screen_bold);
 	ab.attach(msgad);
 
-	Image se(Point(470,100),"snow_cpp.gif");
-    se.set_mask(Point(10,10),200,400);  
+	Image se(Point(470,100),"selvin.jpg");
+    se.set_mask(Point(50,10),200,400);  
 	ab.attach(se);
 	Text msgse(Point(480,360), "Selvin Perez");
 	msgse.set_color(Color::black);

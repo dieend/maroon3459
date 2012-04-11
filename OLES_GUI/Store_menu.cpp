@@ -422,27 +422,27 @@ string Store_menu::show_button(Msg_type type)
 }
 }
 
-	void Store_menu::write() {
+	void Store_menu::write() {//AS-1
 		FILE * pFile;
 		pFile = fopen ("carts.dat","w");
 		if (pFile!=NULL)
 		{
 			fprintf(pFile, "%d", carts.size()); // MA-C2
-			fputs ("\n",pFile);
+			fputs ("\n",pFile); //AS-1
 			for (int i=0; i<(int)carts.size(); i++) { // AS-C3
 			
 				fputs (carts[i].save().c_str(),pFile);
 			}
 			fputs ("\n",pFile);
 			//itoa (cart_items.size(),buffer,10); // AS-C3
-			//fputs (buffer,pFile);
+			//fputs (buffer,pFile); //AS-1
 			fprintf(pFile, "%d",cart_items.size()); // MA-C2
-			fputs ("\n",pFile);
+			fputs ("\n",pFile); //AS-1
 			for (int i=0; i<(int)cart_items.size(); i++) { // AS-C3
 			
 				fputs (cart_items[i].save().c_str(),pFile);
 			}
-			cout << "Saving carts.dat ...." << endl;
+			cout << "Saving carts.dat ...." << endl; //AS-1
 			fclose (pFile); // AS-C3
 		}
 	
