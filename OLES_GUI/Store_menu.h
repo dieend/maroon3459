@@ -63,12 +63,8 @@ public:
    void read_custs(string);
    void read_carts(string);
    void read_catprds(string);
-<<<<<<< .mine
    void write();
    void updatedisplay();
-=======
-   void write();
->>>>>>> .r67
 
 	//show functions added to support GUI interface
    string show_button(Msg_type);
