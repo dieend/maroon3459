@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 Menu::Menu()
 {
 }
@@ -28,6 +29,7 @@ void Menu::display_info() const
         cout << "               " << "Selvin Perez\n";
         cout << "\n";
 }
+
 void Menu::read_test()   // MA-S3
 {
 	cout << "Read file name then read store data \n";
@@ -146,7 +148,9 @@ void Menu::read_test()   // MA-S3
                 //cout<< "reading complete\n";
                 cout<< "Reading Successfull\n"; // MA-A2
         }
+	UpdateDisplayAS();
 }
+
 void Menu::read()
 {
         cout << "Read file name then read store data \n";
@@ -259,7 +263,9 @@ void Menu::read()
                 //cout<< "reading complete\n";
                 cout<< "Reading Successfull\n"; // MA-A2
         }
+	UpdateDisplayAS();
 }
+
 void Menu::show() const 
 {
         //cout << "Show queries \n";
@@ -340,9 +346,12 @@ void Menu::show() const
                 cout << "Wrong Input" << endl;
         }
 
+
 }
+
 void Menu::find() const 
 {
+
     int inp = 0;
         cout << "Find Menu" << endl; //AS-S1
         cout << "1. Find Total sell of a Product" << endl; //AS-S1
@@ -426,11 +435,13 @@ void Menu::find() const
         else {
                 cout << "Wrong Input" << endl;
         }
+
         
 
 
        // cout << "Find queries \n";
 }
+
 void Menu::update()  
 {
      int inp = 0; //AS-S1
@@ -689,7 +700,7 @@ void Menu::update()
                 cout << "Wrong Input" << endl;
         }
         
-        
+        UpdateDisplayAS();
         
         //cout << "Update queries \n";
 
@@ -735,13 +746,12 @@ int Menu::validate() { //AS-C3
 			break;
 		}
 	}
+	UpdateDisplayAS();
 	if (stat == 0) return 1;
 	else return 1;
 	
 
 }
-
-
 
 void Menu::write() { // AS-C3
 	FILE * pFile;
@@ -805,10 +815,34 @@ void Menu::write() { // AS-C3
 		cout << "Saving cust.dat ...." << endl;
 		fclose (pFile);
 	}
+	UpdateDisplayAS();
 }
-
 
 void Menu::exit() {
 	
+
+}
+
+vector<Category> Menu::getCats() {
+	return cats;
+}
+
+vector<Product> Menu::getProds() {
+	return prods;
+}
+
+vector<Cart_item> Menu::getCartItem() {
+	return cart_items;
+}
+
+vector<Cart> Menu::getCart() {
+	return carts;
+}
+
+vector<Customer> Menu::getCusts() {
+	return custs;
+}
+
+void Menu::UpdateDisplayAS() {
 
 }

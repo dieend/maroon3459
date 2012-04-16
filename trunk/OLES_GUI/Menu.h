@@ -15,6 +15,7 @@
 #include "Cart.h"
 #include "Cart_item.h"
 #include "Street_address.h"
+
 using namespace std;
 
 class Menu {
@@ -40,7 +41,14 @@ public:
    void find() const;
    int validate(); // AS-C3
    void write();
+   vector<Category> getCats(); //AS-B2
+   vector<Product> getProds(); //AS-B2
+   vector<Customer> getCusts(); //AS-B2
+   vector<Cart> getCart(); //AS-B2
+   vector<Cart_item> getCartItem(); //AS-B2
+   void UpdateDisplayAS();//AS-B2
    void exit();
+   
 
 private:
    //private data

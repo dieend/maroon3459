@@ -17,6 +17,7 @@ void Store_menu::display_main_menu() const
 	cout << "\nMAIN MENU \n";
 	cout << "1-Info 2-Read 3-Show 4-Find 5-Update 6-Exit\n";
 }
+
 void Store_menu::display_info() const
 {
 	//A.3
@@ -35,6 +36,7 @@ void Store_menu::read_custs(string fname)
 	read_file(ist, num_custs, Store_menu::Custs);
 	cout << "read " << custs.size() << " customer records \n";
 	ist.close();
+	updatedisplay();
 	return;
 }
 
@@ -54,6 +56,7 @@ void Store_menu::read_carts(string fname)
 	read_file(ist, num_items, Store_menu::Items);
 	cout << "read " << cart_items.size() << " cart items \n";
 	ist.close();
+	updatedisplay();
 	return;
 }
 
@@ -72,6 +75,7 @@ void Store_menu::read_catprds(string fname)
 	read_file(ist, num_items, Store_menu::Prds);
 	cout << "read " << prods.size() << " products \n";
 	ist.close();
+	updatedisplay();
 	return;
 }
 
@@ -125,6 +129,7 @@ void Store_menu::show() const
 	}
 	
 }
+
 void Store_menu::find() const 
 {
 	//B.1, 2, 3 merge //cout << "Find queries \n";
@@ -238,7 +243,9 @@ void Store_menu::find() const
 	default:
 		cout << "Invalid request\n";
 	}
+
 }
+
 void Store_menu::update()  
 {
 	//B.1, 2, 3 merge //cout << "Update queries \n";
@@ -327,6 +334,7 @@ void Store_menu::update()
 	default:
 		cout << "Invalid request\n";
 	}
+	updatedisplay();
 }
 
 //open a file and return the expected number of records
@@ -344,6 +352,7 @@ int Store_menu::get_file_info(ifstream& ist, string prompt, string fname)
 	if (!ist) throw InvalidData();
 	return num;
 }
+
 void Store_menu::read_file(ifstream& file, int num_rec, Store_menu::File_type ftype)
 {
 	//A.1, 2 & 3 merge
@@ -390,6 +399,7 @@ void Store_menu::read_file(ifstream& file, int num_rec, Store_menu::File_type ft
 		}
 		++i;
 	}
+	updatedisplay();
 	if(i != num_rec || !file) throw InvalidData();
 }
 //B.1 Count number of products for given category
@@ -421,6 +431,76 @@ string Store_menu::show_button(Msg_type type)
 		throw InvalidType();
 }
 }
+<<<<<<< .mine
+
+	void Store_menu::write() {//AS-1
+		FILE * pFile;
+		pFile = fopen ("carts.dat","w");
+		if (pFile!=NULL)
+		{
+			fprintf(pFile, "%d", carts.size()); // MA-C2
+			fputs ("\n",pFile); //AS-1
+			for (int i=0; i<(int)carts.size(); i++) { // AS-C3
+			
+				fputs (carts[i].save().c_str(),pFile);
+			}
+			fputs ("\n",pFile);
+			//itoa (cart_items.size(),buffer,10); // AS-C3
+			//fputs (buffer,pFile); //AS-1
+			fprintf(pFile, "%d",cart_items.size()); // MA-C2
+			fputs ("\n",pFile); //AS-1
+			for (int i=0; i<(int)cart_items.size(); i++) { // AS-C3
+			
+				fputs (cart_items[i].save().c_str(),pFile);
+			}
+			cout << "Saving carts.dat ...." << endl; //AS-1
+			fclose (pFile); // AS-C3
+		}
+	
+		pFile = fopen ("catprd.dat","w"); // AS-C3
+		{
+			//itoa (cats.size(),buffer,10);
+			//fputs (buffer,pFile); // AS-C3
+			fprintf(pFile, "%d", cats.size());
+			fputs ("\n",pFile);
+			for (int i=0; i<(int)cats.size(); i++) {
+				fputs (cats[i].display().c_str(),pFile); // AS-C3
+			}
+			fputs ("\n",pFile);
+			//itoa (prods.size(),buffer,10);
+			//fputs (buffer,pFile);
+			fprintf(pFile, "%d", prods.size());
+			fputs ("\n",pFile);
+			for (int i=0; i<(int)prods.size(); i++) { // AS-C3
+
+				fputs (prods[i].save().c_str(),pFile);
+			}
+			cout << "Saving catprd.dat ...." << endl;
+			fclose (pFile); // AS-C3
+		}
+	
+			pFile = fopen ("cust.dat","w");
+		{
+			//itoa (custs.size(),buffer,10);
+			//fputs (buffer,pFile);
+			fprintf(pFile,"%d",custs.size());
+			fputs ("\n",pFile); // AS-C3
+			for (int i=0; i<(int)custs.size(); i++) {
+				fputs (custs[i].save().c_str(),pFile);
+			}
+			fputs ("\n",pFile); // AS-C3
+			cout << "Saving cust.dat ...." << endl;
+			fclose (pFile);
+		}
+		updatedisplay();
+	}
+
+	void Store_menu::updatedisplay() {
+		//DisplayAS obj;
+		DisplayAS::Acart_items = cart_items;
+	}
+
+=======
 
 	void Store_menu::write() {//AS-1
 		FILE * pFile;
@@ -482,6 +562,7 @@ string Store_menu::show_button(Msg_type type)
 			fclose (pFile);
 		}
 	}
+>>>>>>> .r67
 /*
 string Store_menu::show_customers(void)
 {
