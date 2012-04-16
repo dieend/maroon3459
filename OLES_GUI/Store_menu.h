@@ -11,6 +11,8 @@
 #include "Customer.h"
 #include "Cart.h"
 #include "Cart_item.h"
+#include "Menu.h"
+#include "DisplayAS.h"
 
 using namespace std;
 
@@ -23,7 +25,7 @@ namespace Store{
 	Find_category_sales, Find_customer_sales, Find_product_sales,
 	Update_add_cart_item, Update_add_product, Update_add_customer,
 	Customers_button, Carts_button, Categories_button, Cart_items_button, Products_button,
-	Display_window, Menu_bar_cb
+	Display_window, Menu_bar_cb,B1,B2,B3
 	};
    
 	struct InvalidType : std::runtime_error {
@@ -61,7 +63,12 @@ public:
    void read_custs(string);
    void read_carts(string);
    void read_catprds(string);
+<<<<<<< .mine
    void write();
+   void updatedisplay();
+=======
+   void write();
+>>>>>>> .r67
 
 	//show functions added to support GUI interface
    string show_button(Msg_type);
