@@ -14,7 +14,7 @@
 #include "Menu.h"
 #include "DisplayAS.h"
 #include "DisplayMA.h"
-
+#include "DisplaySP.h"
 using namespace std;
 
 namespace Store{   
