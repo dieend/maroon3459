@@ -6,6 +6,7 @@
 
 #include "Store_menu.h"
 #include "DisplayAS.h"
+#include "DisplayMA.h"
 #include <iostream>
 
 using namespace std;
@@ -244,7 +245,7 @@ int main()
 					exit(0); //exit program
 					break;
 				case B1:
-
+                                        DisplayMA::display();
 					break;
 				case B2:
 					DisplayAS::display();
@@ -283,7 +284,7 @@ void do_about_box(Graph_lib::Window& w) //AS-1
 	Text msgal(Point(15,360), "Aldo Suwandi");
 	msgal.set_color(Color::black);
 	msgal.set_font_size(20);
-	msgal.set_font(Font::screen_bold);
+	msgal.set_font(Graph_lib::Font::screen_bold);
 	ab.attach(msgal);
 
 	Image ad(Point(240,100),"adin.jpg");
@@ -292,7 +293,7 @@ void do_about_box(Graph_lib::Window& w) //AS-1
 	Text msgad(Point(240,360), "Muhammad Adinata");
 	msgad.set_color(Color::black);
 	msgad.set_font_size(20);
-	msgad.set_font(Font::screen_bold);
+	msgad.set_font(Graph_lib::Font::screen_bold);
 	ab.attach(msgad);
 
 	Image se(Point(470,100),"selvin.jpg");
@@ -301,7 +302,7 @@ void do_about_box(Graph_lib::Window& w) //AS-1
 	Text msgse(Point(480,360), "Selvin Perez");
 	msgse.set_color(Color::black);
 	msgse.set_font_size(20);
-	msgse.set_font(Font::screen_bold);
+	msgse.set_font(Graph_lib::Font::screen_bold);
 	ab.attach(msgse);
 
 	wait_for_menu_bar_click();

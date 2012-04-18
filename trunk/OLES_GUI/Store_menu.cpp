@@ -497,6 +497,9 @@ string Store_menu::show_button(Msg_type type)
 	void Store_menu::updatedisplay() {
 		//DisplayAS obj;
 		DisplayAS::Acart_items = cart_items;
+                DisplayMA::Acarts = &carts;
+                DisplayMA::Acart_item = &cart_items;
+                DisplayMA::Aprod = &prods;
 	}
 
 /*
