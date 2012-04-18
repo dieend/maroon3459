@@ -252,6 +252,7 @@ int main()
 					break;
 
 				case B3:
+					DisplaySP::display();
 					break;
 				default:
 					cout << "case not implemented\n";
