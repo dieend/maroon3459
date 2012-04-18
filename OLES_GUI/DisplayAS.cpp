@@ -41,18 +41,22 @@ void DisplayAS::display() {
 	for (int i = 0; i < 5;i++) {
 		
 		message[i].append(pesan1);
+                out.str(""); // B1-MA
 		out << Acart_items[i].get_cart_id();
 		message[i].append(out.str());
 		message[i].append(enter);
 		message[i].append(pesan2);
+                out.str("");// B1-MA
 		out << Acart_items[i].get_item_id();
 		message[i].append(out.str());
 		message[i].append(enter);
 		message[i].append(pesan3);
+                out.str("");// B1-MA
 		out << Acart_items[i].get_prod_id();
 		message[i].append(out.str());
 		message[i].append(enter);
 		message[i].append(pesan4);
+                out.str("");// B1-MA
 		out << Acart_items[i].get_prod_qty();
 		message[i].append(out.str());
 		message[i].append(enter);
