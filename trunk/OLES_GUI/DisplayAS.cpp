@@ -35,19 +35,26 @@ void DisplayAS::display() {
 	string enter = "\n";
 	string message[5];
 	char as[10];
+	std::string s;
+	std::stringstream out;
+	s = out.str();
 	for (int i = 0; i < 5;i++) {
 		
 		message[i].append(pesan1);
-		message[i].append(itoa(Acart_items[i].get_cart_id(),as,10));
+		out << Acart_items[i].get_cart_id();
+		message[i].append(out.str());
 		message[i].append(enter);
 		message[i].append(pesan2);
-		message[i].append(itoa(Acart_items[i].get_item_id(),as,10));
+		out << Acart_items[i].get_item_id();
+		message[i].append(out.str());
 		message[i].append(enter);
 		message[i].append(pesan3);
-		message[i].append(itoa(Acart_items[i].get_prod_id(),as,10));
+		out << Acart_items[i].get_prod_id();
+		message[i].append(out.str());
 		message[i].append(enter);
 		message[i].append(pesan4);
-		message[i].append(itoa(Acart_items[i].get_prod_qty(),as,10));
+		out << Acart_items[i].get_prod_qty();
+		message[i].append(out.str());
 		message[i].append(enter);
 		cout << message;
 
