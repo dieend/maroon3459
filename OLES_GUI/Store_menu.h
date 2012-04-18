@@ -13,6 +13,7 @@
 #include "Cart_item.h"
 #include "Menu.h"
 #include "DisplayAS.h"
+#include "DisplayMA.h"
 
 using namespace std;
 
