@@ -26,7 +26,7 @@ namespace Store{
 	Find_category_sales, Find_customer_sales, Find_product_sales,
 	Update_add_cart_item, Update_add_product, Update_add_customer,
 	Customers_button, Carts_button, Categories_button, Cart_items_button, Products_button,
-	Display_window, Menu_bar_cb,B1,B2,B3
+	Display_window, Menu_bar_cb,C2,C3,B1,B2,B3,
 	};
    
 	struct InvalidType : std::runtime_error {
