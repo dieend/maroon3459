@@ -108,6 +108,10 @@ Fl_Menu_Item menu_bar[] = {
  {"Info", 0,  (Fl_Callback*)Main_Window_CB, Address (About_info), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"Help", 0,  (Fl_Callback*)Main_Window_CB, Address (About_help), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
+ {"Graph", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
+ {"C2", 0,  (Fl_Callback*)Main_Window_CB, Address (B1), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"C3", 0,  (Fl_Callback*)Main_Window_CB, Address (B2), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0},
  {"Display", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
  {"B1", 0,  (Fl_Callback*)Main_Window_CB, Address (B1), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"B2", 0,  (Fl_Callback*)Main_Window_CB, Address (B2), 0, FL_NORMAL_LABEL, 0, 14, 0},
@@ -244,8 +248,14 @@ int main()
 					m.write();
 					exit(0); //exit program
 					break;
+				case C2:
+					//Put C2 code here
+					break;
+				case C3:
+					//Put C3 code here
+					break;
 				case B1:
-                                        DisplayMA::display();
+                    DisplayMA::display();
 					break;
 				case B2:
 					DisplayAS::display();
