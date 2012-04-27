@@ -48,3 +48,6 @@ int Cart::get_cart_id() const{
 int Cart::get_cust_id() const{
 	return cust_id;
 }
+Date Cart::get_date() const{
+  return cart_purchase_date;
+}
