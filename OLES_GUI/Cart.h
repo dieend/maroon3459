@@ -21,6 +21,7 @@ public:
 	Cart (int cart_id, int cust_id, Chrono::Date cart_puchase_date);
 	int get_cart_id() const;//MA-S3
 	int get_cust_id() const;//MA-S3
+  Date get_date() const; //sp-c3
    // utility functions
 	string display() const;
 	string save(); // AS-C3
