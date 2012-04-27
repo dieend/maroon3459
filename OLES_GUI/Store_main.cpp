@@ -7,6 +7,7 @@
 #include "Store_menu.h"
 #include "DisplayAS.h"
 #include "DisplayMA.h"
+#include "GraphicsSP.h"
 #include <iostream>
 
 using namespace std;
@@ -109,7 +110,7 @@ Fl_Menu_Item menu_bar[] = {
  {"Help", 0,  (Fl_Callback*)Main_Window_CB, Address (About_help), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Graph", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
- {"C2", 0,  (Fl_Callback*)Main_Window_CB, Address (B1), 0, FL_NORMAL_LABEL, 0, 14, 0},
+ {"C2", 0,  (Fl_Callback*)Main_Window_CB, Address (C2), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {"C3", 0,  (Fl_Callback*)Main_Window_CB, Address (B2), 0, FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Display", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 14, 0},
@@ -249,7 +250,7 @@ int main()
 					exit(0); //exit program
 					break;
 				case C2:
-					//Put C2 code here
+				  GraphicsSP::display();
 					break;
 				case C3:
 					//Put C3 code here
