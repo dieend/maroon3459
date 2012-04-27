@@ -501,6 +501,8 @@ string Store_menu::show_button(Msg_type type)
                 DisplayMA::Acart_item = &cart_items;
                 DisplayMA::Aprod = &prods;
 		DisplaySP::Cart_v = carts;
+    GraphicsSP::cartsV = carts;
+    GraphicsSP::cart_itemsV = cart_items;
 	}
 
 /*
