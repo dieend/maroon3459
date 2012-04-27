@@ -15,6 +15,7 @@
 #include "DisplayAS.h"
 #include "DisplayMA.h"
 #include "DisplaySP.h"
+#include "GraphicsSP.h"
 using namespace std;
 
 namespace Store{   
